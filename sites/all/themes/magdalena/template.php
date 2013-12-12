@@ -32,6 +32,9 @@ function magdalena_preprocess_html(&$vars) {
  * Override or insert variables into the page template.
  */
 function magdalena_preprocess_page(&$vars) {
+  // Remove title on front page
+  if(drupal_is_front_page()) $vars['title'] = '';
+
   // Move secondary tabs into a separate variable.
   $vars['tabs2'] = array(
     '#theme' => 'menu_local_tasks',
