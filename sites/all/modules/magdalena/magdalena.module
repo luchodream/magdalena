@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * Implements hook_block_info().
+ */
+function magdalena_block_info() {
+  $blocks['contact_info'] = array(
+    'info' => t('Contact info'),
+  );
+  $blocks['contact_phone'] = array(
+    'info' => t('Contact phone numbers'),
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function magdalena_block_view($delta) {
+  switch ($delta) {
+    case 'contact_info':
+      $block['content'] = theme('contact_info_block');
+      break;
+    case 'contact_phone':
+      $block['content'] = theme('contact_phone_block');
+      break;
+  }
+  return $block;
+}
+
+/**
+ * Implement hook_theme().
+ */
+function magdalena_theme($existing, $type, $theme, $path) {
+  return array(
+    'contact_phone_block' => array(
+      'render element' => 'form',
+      'template' => 'block--contact-phone',
+      'path' => drupal_get_path('module', 'magdalena') . '/templates',
+    ),
+    'contact_info_block' => array(
+      'render element' => 'form',
+      'template' => 'block--contact-info',
+      'path' => drupal_get_path('module', 'magdalena') . '/templates',
+    ),    
+  );
+}

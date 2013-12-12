@@ -1,0 +1,4 @@
+name = Magdalena core
+description = Magdalena base module.
+core = 7.x
+package = Magdalena
