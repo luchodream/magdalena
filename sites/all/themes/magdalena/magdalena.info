@@ -1,0 +1,27 @@
+name = Magdalena
+description = A multi-column theme which can be configured to modify colors and switch between fixed and fluid width layouts.
+package = Magdalena
+core = 7.x
+
+regions[header_right] = Header Right
+
+regions[featured] = Featured
+
+regions[navbar] = Navbar
+regions[content] = Content
+regions[sidebar_first] = Sidebar first
+regions[sidebar_second] = Sidebar second
+
+regions[triptych_first] = Triptych first
+regions[triptych_middle] = Triptych middle
+regions[triptych_last] = Triptych last
+
+regions[footer_firstcolumn] = Footer first column
+regions[footer_secondcolumn] = Footer second column
+regions[footer_thirdcolumn] = Footer third column
+regions[footer_fourthcolumn] = Footer fourth column
+regions[page_bottom] = Page bottom
+
+;stylesheets[all][] = style.css
+stylesheets[all][] = fresh.css
+stylesheets[print][] = print.css

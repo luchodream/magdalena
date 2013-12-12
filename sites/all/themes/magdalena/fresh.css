@@ -1,0 +1,54 @@
+/**
+ * Generic elements
+ */
+body {
+  margin: 0;
+  padding: 0;
+  font: 76%/170% Verdana, sans-serif;
+  color: #494949;
+}
+
+#wrapper {
+	width: 1000px;
+	margin: auto;
+}
+
+#container {
+	width: 990px;
+	margin: auto;
+}
+
+#sidebar-first {
+	width: 20%;
+	float: left;
+}
+
+#center {
+	width: 100%;
+	float: left;
+}
+
+.sidebar-first #center {
+	width: 80%;
+	float: left;
+}
+
+
+#header-left{
+	width: 20%;
+	float: left;
+}
+
+#header-right{
+	width: 80%;
+	float: left;
+}
+
+#footer-firstcolumn, #footer-secondcolumn, #footer-thirdcolumn, #footer-fourthcolumn {
+	float: left;
+	width: 25%;
+}
+
+#footer {
+	clear: both;
+}
