@@ -211,6 +211,14 @@
  * @endcode
  */
 $databases = array();
+$databases['default']['default'] = array(
+	'driver' => 'mysql',
+	'database' => 'magdalena',
+	'username' => 'root',
+	'password' => 'qwerty',
+	'host' => 'localhost',
+	'prefix' => '',
+);
 
 /**
  * Access control for update.php script.
