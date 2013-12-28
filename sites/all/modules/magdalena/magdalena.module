@@ -1,6 +1,72 @@
 <?php
 
 /**
+ * Implements hook_init().
+ */
+function magdalena_init() {
+    drupal_add_js(array('magdalena' => array('fb_api' => variable_get('fb_api'))), 'setting');    
+    // Add facebook SDK
+    drupal_add_js('(function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/es_LA/all.js";
+            fjs.parentNode.insertBefore(js, fjs);
+            }(document, \'script\', \'facebook-jssdk\'));', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+    );
+    drupal_add_js(drupal_get_path('module', 'magdalena') . '/js/magdalena.js');
+}
+
+/*
+ * Implements hook_menu().
+ */
+
+function magdalena_menu() {
+  $items['test'] = array(
+    'title' => 'Test page',
+    'page callback' => 'magdalena_test_page',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/magdalena'] = array(
+    'title' => 'Compraventa',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('magdalena_global_settings_form'),
+    'access arguments' => array('administer magdalena'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Site configuration form
+ */
+function magdalena_global_settings_form() {
+  $form['global'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('General'),
+    '#collapsible' => true,
+  );
+  $form['global']['fb_api'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Facebook API Key'),
+    '#default_value' => variable_get('fb_api'),
+  );
+  $form['global']['fb_secret'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Facebook API Private Key'),
+    '#default_value' => variable_get('fb_secret'),
+  );  
+  $form['global']['fb_like_page'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Facebook Page URL'),
+    '#description' => t('Like box page URL'),
+    '#default_value' => variable_get('fb_like_page'),
+  );
+  return system_settings_form($form);
+}
+
+/**
  * Implements hook_block_info().
  */
 function magdalena_block_info() {
@@ -10,6 +76,9 @@ function magdalena_block_info() {
   $blocks['contact_phone'] = array(
     'info' => t('Contact phone numbers'),
   );
+  $blocks['like_box'] = array(
+    'info' => t('Like box'),
+  );  
   return $blocks;
 }
 
@@ -24,6 +93,9 @@ function magdalena_block_view($delta) {
     case 'contact_phone':
       $block['content'] = theme('contact_phone_block');
       break;
+    case 'like_box':
+      $block['content'] = theme('magdalena_like_box');
+      break;      
   }
   return $block;
 }
@@ -34,14 +106,48 @@ function magdalena_block_view($delta) {
 function magdalena_theme($existing, $type, $theme, $path) {
   return array(
     'contact_phone_block' => array(
-      'render element' => 'form',
       'template' => 'block--contact-phone',
       'path' => drupal_get_path('module', 'magdalena') . '/templates',
     ),
     'contact_info_block' => array(
-      'render element' => 'form',
       'template' => 'block--contact-info',
       'path' => drupal_get_path('module', 'magdalena') . '/templates',
-    ),    
+    ),
+    'magdalena_like_box' => array(
+      'template' => 'block--like-box',
+      'path' => drupal_get_path('module', 'magdalena') . '/templates',
+    ),  
   );
+}
+
+/**
+ * Implements hook_library().
+ */
+function magdalena_library() {
+  $libraries['jquery_ui_spinner'] = array(
+    'title' => 'jQuery Spinner',
+    'website' => 'http://github.com/btburnett3/jquery.ui.spinner/',
+    'version' => '1.8',
+    'js' => array(
+      libraries_get_path('jquery.ui.spinner') . '/ui.spinner.min.js' => array(),
+    ),
+    'css' => array(
+      libraries_get_path('jquery.ui.spinner') . '/ui.spinner.css' => array(),
+    ),
+    'dependencies' => array(
+      array('system', 'ui.widget'),
+    ),
+  );
+  return $libraries;
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function magdalena_form_alter(&$form, &$form_state, $form_id) {  
+      //dpm($form_id);
+      //dpm($form);
+  if (strstr($form_id, 'commerce_cart_add_to_cart_form') || $form_id == 'views_form_commerce_cart_form_default') {
+    $form['#attached']['library'][] = array('magdalena', 'jquery_ui_spinner');
+  }
 }
