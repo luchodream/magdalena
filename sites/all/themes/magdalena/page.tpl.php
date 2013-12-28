@@ -1,7 +1,7 @@
 <?php
 ?>
   <?php print render($page['header']); ?>
-
+  <div id="fb-root"></div>
   <div id="wrapper">
     <div id="container" class="clearfix">
 
@@ -31,7 +31,7 @@
         </div>
         <?php endif; ?>
 
-        <div id="center">          
+        <div id="center">
           <?php if ($page['navbar']): ?>
             <div id="navbar"><?php print render($page['navbar']); ?></div>
           <?php endif; ?>
