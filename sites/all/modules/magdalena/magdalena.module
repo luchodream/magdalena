@@ -81,7 +81,10 @@ function magdalena_block_info() {
   ); 
   $blocks['social_top'] = array(
     'info' => t('Social top'),
-  );   
+  );
+  $blocks['user_menu'] = array(
+    'info' => t('User menu'),
+  );  
   return $blocks;
 }
 
@@ -89,6 +92,7 @@ function magdalena_block_info() {
  * Implements hook_block_view().
  */
 function magdalena_block_view($delta) {
+  $block = array();
   switch ($delta) {
     case 'contact_info':
       $block['content'] = theme('contact_info_block');
@@ -102,6 +106,10 @@ function magdalena_block_view($delta) {
     case 'social_top':
       $block['content'] = theme('magdalena_social_top');
       break; 
+    case 'user_menu':
+      global $user;      
+      if($user->uid) $block['content'] = theme('magdalena_user_menu', array('user' => $user));
+      break;       
   }
   return $block;
 }
@@ -126,7 +134,14 @@ function magdalena_theme($existing, $type, $theme, $path) {
     'magdalena_like_box' => array(
       'template' => 'block--like-box',
       'path' => drupal_get_path('module', 'magdalena') . '/templates',
-    ),  
+    ),
+    'magdalena_user_menu' => array(
+      'template' => 'block--user-menu',
+      'path' => drupal_get_path('module', 'magdalena') . '/templates',
+      'variables' => array(
+        'user' => NULL,
+      ),      
+    ),    
   );
 }
 
