@@ -51,15 +51,15 @@ body {
 #header-left{
 	width: 20%;
 	float: left;
-        margin-top: 2em;
+    margin-top: 2em;
 }
 
 #header-right{
-        text-align: right;
-        display: inline;
+    text-align: right;
+    display: inline;
 	width: 80%;
 	float: left;
-        font-size: 10px;
+    font-size: 10px;
 }
 
 #header-right input[type="text"]{
@@ -92,11 +92,11 @@ body {
 }
 
 #footer {
-        background-color: #ECECEC;
+    background-color: #ECECEC;
 	clear: both;
-        color: #342D7B;
-        text-align: left;
-        padding: 15px;
+    color: #342D7B;
+    text-align: left;
+    padding: 15px;
 }
 
 #footer a{
@@ -135,27 +135,69 @@ body {
     color: white;
 }
 
-.number, .movil{
-    margin-left: 3px;
-    display: inline;
-    color: #342D7B;
-    padding-left: 30px;
-}
+/***************************** Contact info top ******************************/
 
-.phone{
+.block-contact-top {
+    margin-bottom: 10px;
+    float: left;
     background-color: #ECECEC;
-    width: 80%;
-    margin-bottom: 8px;
-    margin-right: 2px;
+    font-size: 14px;
+    color: #342D7B;
+    padding: 3px 5px 0 5px;
+    width: 360px;
+    height: 22px;
     font-weight: bold;
 }
 
-#footer .phone{
-    font-weight: normal;
+.block-contact-top .number, .block-contact-top .movil{
+    float: left;
 }
 
-#block-magdalena-contact-info .title{
-    font-size: 14px;
+.block-contact-top .movil{
+    margin-left: 20px;
+}
+
+.block-contact-top .movil small{
+    margin-left: 3px;
+}
+
+/******************************* Block search ***********************************/
+
+.block-search {
+    margin-left: 3px;
+    margin-bottom: 10px;
+    float: left;
+}
+
+.block-search .form-item {
+    padding: 0;
+    margin: 0;
+}
+
+.block-search input[type="text"]{
+    padding: 0;
+    margin: 0;
+    width: 275px;
+    border: 1px solid #342D7B;
+    height: 23px;
+}
+
+.block-search input[type="submit"]{
+    border: 0;
+    height: 25px;
+    padding: 0 5px;
+    margin: 0;    
+    font-weight: 300;
+    text-transform: uppercase;
+    background-color: #342D7B;
+    color: #fff;
+}
+
+
+
+
+#footer .phone{
+    font-weight: normal;
 }
 
 #footer .phone .number, #footer .phone .movil .number, 
@@ -173,9 +215,7 @@ body {
     font-size: 12px;
 }
 
-.movil small{
-    margin-left: 3px;
-}
+/******************************** Main menu **************************************/
 
 .block-main-menu{
     float: left;
@@ -211,10 +251,12 @@ body {
     margin: 0px;
 }
 
-#block-menu-menu-categorias a, #block-system-main-menu a{
+.block-main-menu a{
     text-decoration: none;
     color: #342D7B;
 }
+
+/************************************* Contact info **********************************/
 
 .mail, .text, .facebook, .twitter{
     margin: 0px;
@@ -286,7 +328,7 @@ body {
 
 .block-menu-categorias ul li{
     list-style: none; 
-    border-bottom: 1px #342D7B dashed;
+    border-bottom: 1px #342D7B dotted;
 }
 
 
@@ -360,8 +402,29 @@ body {
 
 /****************************** Adds block ******************************/
 
-.view-publicidad-right .views-field-field-image{
+.view-publicidad-right, .view-publicidad-main{
+    position: relative;
+}
+
+.view-publicidad-right .imagen{
     height: 100px;
+}
+
+.view-publicidad-right a, .view-publicidad-main a{
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: block;
+    height: 100px;
+    width: 232px;
+    text-indent: -9999px;
+    font-size: 1px;
+}
+
+.view-publicidad-main a{
+    height: 299px;
+    width: 486px;
 }
 
 /**************************** Shopping cart *****************************/
