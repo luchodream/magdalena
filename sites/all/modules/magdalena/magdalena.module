@@ -84,7 +84,10 @@ function magdalena_block_info() {
   );
   $blocks['user_menu'] = array(
     'info' => t('User menu'),
-  );  
+  );
+  $blocks['shopping_cart']= array(
+    'info' => t('Shopping cart'),
+  );    
   return $blocks;
 }
 
@@ -109,9 +112,30 @@ function magdalena_block_view($delta) {
     case 'user_menu':
       global $user;      
       if($user->uid) $block['content'] = theme('magdalena_user_menu', array('user' => $user));
-      break;       
+      break;
+    case 'shopping_cart':
+      $block['content'] = _magdalena_build_shopping_cart();
+      break;    
   }
   return $block;
+}
+
+/**
+ * Helper: build shopping cart
+ */
+function _magdalena_build_shopping_cart(){
+  global $user;
+  $quantity = 0;
+  $total    = array('amount' => 0, 'currency_code' => commerce_default_currency());
+  $order    = commerce_cart_order_load($user->uid);
+  if ($order) {
+      $wrapper    = entity_metadata_wrapper('commerce_order', $order);
+      $line_items = $wrapper->commerce_line_items;
+      $quantity   = commerce_line_items_quantity($line_items, commerce_product_line_item_types());
+      $total      = commerce_line_items_total($line_items);
+      $currency   = commerce_currency_load($total['currency_code']);
+  }
+  return theme('magdalena_shopping_cart', array('quantity' => $quantity, 'total' => $total));
 }
 
 /**
@@ -135,6 +159,14 @@ function magdalena_theme($existing, $type, $theme, $path) {
       'template' => 'block--like-box',
       'path' => drupal_get_path('module', 'magdalena') . '/templates',
     ),
+    'magdalena_shopping_cart' => array(
+      'template' => 'block--shopping-cart',
+      'path' => drupal_get_path('module', 'magdalena') . '/templates',
+      'variables' => array(
+        'quantity' => 0,
+        'total'    => 0,
+      ),        
+    ),    
     'magdalena_user_menu' => array(
       'template' => 'block--user-menu',
       'path' => drupal_get_path('module', 'magdalena') . '/templates',

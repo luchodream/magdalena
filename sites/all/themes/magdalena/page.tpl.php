@@ -33,7 +33,7 @@
 
         <div id="center">
           <?php if ($page['navbar']): ?>
-            <div id="navbar"><?php print render($page['navbar']); ?></div>
+            <div id="navbar" class="clearfix"><?php print render($page['navbar']); ?></div>
           <?php endif; ?>
           <a id="main-content"></a>
           <?php if ($tabs): ?><div id="tabs-wrapper" class="clearfix"><?php endif; ?>

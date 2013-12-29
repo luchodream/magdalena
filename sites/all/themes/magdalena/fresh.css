@@ -178,7 +178,9 @@ body {
 }
 
 .block-main-menu{
+    float: left;
     width: 486px;
+    height: 28px;
     background-color: #FBBA00;
     text-align: center;
 }
@@ -360,4 +362,35 @@ body {
 
 .view-publicidad-right .views-field-field-image{
     height: 100px;
+}
+
+/**************************** Shopping cart *****************************/
+
+.block-shopping-cart{
+    color: #fff;
+    float: left;
+    width: 232px;
+    height: 28px;
+    background-color: #342D7B;
+}
+
+.block-shopping-cart a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #fff;
+}
+
+.block-shopping-cart .cart-link{
+    float: left;
+}
+
+.block-shopping-cart .cart-link-inner,
+.block-shopping-cart .cart-total-inner{
+    padding: 5px;
+}
+
+.block-shopping-cart .cart-total{
+    font-weight: 700;    
+    float: right;
 }
