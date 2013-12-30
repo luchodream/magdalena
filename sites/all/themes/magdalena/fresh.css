@@ -317,6 +317,11 @@ body {
     clear: both;
 }
 
+.node-type-receta h1.page-title, .node-type-producto h1.page-title,
+.page-taxonomy-term h1.page-title{
+    display: none;
+}
+
 /********************************** Menu Categories ********************************/
 
 .block-menu-categorias{
