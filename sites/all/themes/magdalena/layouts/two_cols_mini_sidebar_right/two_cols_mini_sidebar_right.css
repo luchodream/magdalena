@@ -1,0 +1,16 @@
+
+.panel-2col-mini-sidebar { 
+/*  overflow: hidden;  */
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.panel-2col-mini-sidebar .panel-col-first { 
+  float: left;
+  width: 85%;
+}
+
+.panel-2col-mini-sidebar .panel-col-last { 
+  float: left;
+  width: 15%;
+}

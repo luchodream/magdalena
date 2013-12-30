@@ -301,6 +301,15 @@ body {
   width: 232px;
 }
 
+.panel-2col-mini-sidebar .panel-col-first { 
+  width: 550px;
+}
+
+.panel-2col-mini-sidebar .panel-col-last { 
+  width: 170px;
+}
+
+
 
 /************************************* Misc *****************************************/
 
