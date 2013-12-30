@@ -1,0 +1,16 @@
+
+.panel-2col-sidebar-right { 
+/*  overflow: hidden;  */
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.panel-2col-sidebar-right .panel-col-first { 
+  float: left;
+  width: 60%;
+}
+
+.panel-2col-sidebar-right .panel-col-last { 
+  float: left;
+  width: 40%;
+}
