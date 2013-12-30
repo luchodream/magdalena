@@ -85,9 +85,12 @@ function magdalena_block_info() {
   $blocks['user_menu'] = array(
     'info' => t('User menu'),
   );
+  $blocks['facebook_comments']= array(
+    'info' => t('Facebook comments'),
+  );
   $blocks['shopping_cart']= array(
     'info' => t('Shopping cart'),
-  );    
+  );
   return $blocks;
 }
 
@@ -113,6 +116,9 @@ function magdalena_block_view($delta) {
       global $user;      
       if($user->uid) $block['content'] = theme('magdalena_user_menu', array('user' => $user));
       break;
+    case 'facebook_comments':
+      if(arg(0) == 'node' && arg(1)) $block['content'] = theme('magdalena_facebook_comments', array('nid' => arg(1)));
+      break;      
     case 'shopping_cart':
       $block['content'] = _magdalena_build_shopping_cart();
       break;    
@@ -173,7 +179,14 @@ function magdalena_theme($existing, $type, $theme, $path) {
       'variables' => array(
         'user' => NULL,
       ),      
-    ),    
+    ), 
+    'magdalena_facebook_comments' => array(
+      'template' => 'block--facebook-comments',
+      'path' => drupal_get_path('module', 'magdalena') . '/templates',
+      'variables' => array(
+        'user' => NULL,
+      ),      
+    ),       
   );
 }
 

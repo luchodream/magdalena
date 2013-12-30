@@ -1,0 +1,1 @@
+<div class="fb-comments" data-href="<?php print url('node/' . $nid, array('absolute' => TRUE)) ?>" data-width="545" data-num-posts="10"></div>
