@@ -25,6 +25,7 @@ body {
 #sidebar-first {
 	width: 264px;
 	float: left;
+        margin-top: 8px;
 }
 
 #center {
@@ -41,12 +42,13 @@ body {
     background-repeat: no-repeat;
     color: white;
     height: 195px;
+    font-family: Verdana, sans-serif;
 }
 
 #header a{
     color: white;
+    text-decoration: underline;
 }
-
 
 #header-left{
 	width: 20%;
@@ -72,7 +74,7 @@ body {
    border: grey thick;
 }
 
-#header-right input[type="submit"]{
+#block-user-login input[type="submit"]{
    margin-left: 10px;
    margin-top: 2px;
    width: 17px;
@@ -85,6 +87,54 @@ body {
    text-indent: -9999px;
 }
 
+#block-user-login .form-actions{
+    margin-top: 8px;
+}
+
+a{
+    text-decoration: none;
+    color: #3f3983;
+}
+
+#block-magdalena-social-top{
+    float: right;
+    clear: right;
+    padding-right: 35px;
+    font-weight: bold;
+    font-family: 'Quicksand';
+    display: inline-block;
+}
+
+#block-magdalena-social-top .text{
+    font-size: 14px;
+    float: left;
+    margin-top: 2px;
+    margin-right: 2px;
+}
+
+#block-magdalena-social-top a{
+    text-decoration: none;
+    float: left;
+    display: block;
+    width: 25px;
+    height: 25px;
+    text-indent: -9999px;
+    text-align: left;
+    margin-left: 4px;
+}
+
+#block-magdalena-social-top .twitter,
+#block-magdalena-social-top .facebook{
+    float: left;
+}
+
+#block-magdalena-social-top .twitter a{
+    background-color: white;
+}
+
+#block-magdalena-social-top .facebook a{
+    background-color: white;
+}
 
 #footer-firstcolumn, #footer-secondcolumn, #footer-thirdcolumn, #footer-fourthcolumn {
 	float: left;
@@ -93,8 +143,8 @@ body {
 
 #footer {
     background-color: #ECECEC;
-	clear: both;
-    color: #342D7B;
+    clear: both;
+    color: #1c1b41;
     text-align: left;
     padding: 15px;
 }
@@ -110,11 +160,12 @@ body {
 
 #footer .phone .number, #footer .phone .movil .number, 
 #footer .phone .movil{
-    font-size: 18px;
+    font-size: 14px;
     padding: 0px;
-    color: red;
+    color: #d31f1f;
     margin: 0px;
     padding-right: 80px;
+    font-weight: bold;
 }
 
 #footer .phone .movil small{
@@ -151,10 +202,30 @@ body {
     display: inline;
     margin-left: 1em;
     text-transform: uppercase;
+    font-weight: normal;
+    font-size: 10px;
+    text-shadow: 8px black;
 }
 
 .block-user-login .form-item span{
     color: white;
+}
+
+#block-magdalena-user-menu ul li{
+    list-style: none;
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+#block-magdalena-user-menu{
+    font-family: 'Quicksand';
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#block-magdalena-user-menu a{
+    text-decoration: none;
 }
 
 /***************************** Contact info top ******************************/
@@ -200,12 +271,15 @@ body {
     padding: 0;
     margin: 0;
     width: 275px;
-    border: 1px solid #342D7B;
+    border: 1px solid grey;
+    border-right: none;
     height: 23px;
+    width: 270px;
 }
 
 .block-search input[type="submit"]{
-    border: 0;
+    border: 1px solid grey;
+    border-left: none;
     height: 25px;
     padding: 0 5px;
     margin: 0;    
@@ -213,6 +287,7 @@ body {
     text-transform: uppercase;
     background-color: #342D7B;
     color: #fff;
+    width: 74px;
 }
 
 .block-search .form-item, .form-actions{
@@ -268,11 +343,12 @@ body {
     padding: 0px;
     text-transform: uppercase;
     font-size: 15px;
+    font-weight: bold;
 }
 
 #footer .mail a{
     text-transform: lowercase;
-    color: red;
+    color: #d31f1f;
     font-size: 17px;
 }
 
@@ -281,6 +357,27 @@ body {
     text-indent: -9999px;
 }
 
+#footer .twitter a, #footer .facebook a{
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    float: left;
+    margin-left: 6px;
+}
+
+#footer .twitter a{
+    background-image: url('images/twitter-logo.png');
+}
+
+#footer .facebook a{
+    background-image: url('images/facebook-logo.png');
+}
+
+#footer .social .text{
+    float: left;
+    margin-top: 4px;
+    font-size: 14px;
+}
 
 #block-user-login{
     float: right;
@@ -334,6 +431,31 @@ body {
     display: none;
 }
 
+#block-search-form .form-actions input[type="submit"]{
+    font-family: 'Quicksand';
+    font-weight: bold;
+}
+
+.pane-views-oferta-semana-block h2{
+    text-align: center;
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #342D7B;
+    background-image: url('images/linea.png');
+}
+
+.pane-views-oferta-semana-block{
+    margin-top: 28px;
+}
+
+.panel-middle{
+    margin-top: 5px;
+}
+
+.pane-page-title h1{
+    color: #3f3983;
+}
+
 /**************************** Menu Categories ****************************/
 
 .block-menu-categorias{
@@ -357,9 +479,12 @@ body {
     border-bottom: 1px #342D7B dotted;
 }
 
-
-.block-menu-categorias .term-link{
-    padding: 20px 0;    
+#block-views-front-menu-categorias-block .term-name a{
+    font-size: 15px;
+    display: block;
+    width: auto;
+    padding-top: 24px;
+    padding-bottom: 24px;
 }
 
 .block-menu-categorias .term-link a{
@@ -369,24 +494,29 @@ body {
     font-size: 1px;
     width: 25px;
     height: 25px;
+    padding-bottom: 21px;
+    padding-top: 21px;
     background: url('images/blue-arrow.png') no-repeat;
+    background-position-y: 21px;
 }
 
 .block-menu-categorias .term-image{
     width: 70px;    
     float: left;
+    padding-top: 4px;
 }
 
 .block-menu-categorias .term-name{
     font-weight: 800;
     font-size: 16px;  
-    padding-top: 15px;
     width: 130px;
     float: left;
 }
 
-.block-menu-categorias .categoria-4 .term-name{
-    padding-top: 10px;
+#block-views-front-menu-categorias-block .categoria-4 .term-name a, 
+#block-views-front-menu-categorias-block .categoria-5 .term-name a{
+    padding-top: 14px;
+    padding-bottom: 14px;
 }
 
 /***************************** Footer Blocks ****************************/
@@ -396,7 +526,9 @@ body {
     margin-left: 0px;
     text-transform: uppercase;
     padding: 0px;
-    font-size: 12px;
+    font-size: 10px;
+    font-family: 'Quicksand';
+    font-weight: bold;
 }
 
 .block-footer ul{
@@ -405,7 +537,15 @@ body {
 }
 
 .block-footer h2{
+    font-size: 12px;
+}
+
+#block-magdalena-contact-info h2{
     font-size: 14px;
+}
+
+#footer .social{
+    font-weight: bold;
 }
 
 /******************************* Like Box *******************************/
@@ -483,3 +623,340 @@ body {
     font-weight: 700;    
     float: right;
 }
+
+#tabs-wrapper h1{
+    color: #1c1b41;
+    text-transform: uppercase;
+    font-size: 24px;
+    margin-top: 30px;
+}
+
+.view-commerce-cart-form th{
+    text-transform: uppercase;
+    color: #1c1b41;
+    font-family: Verdana, sans-serif;
+    font-size: 11px;
+    padding: 3px 10px 3px 10px;
+    text-align: center;
+    background-color: #ECECEC;
+    border: none;
+}
+
+.view-commerce-cart-form table{
+    width: 718px;
+}
+
+.view-commerce-cart-form tr{
+    border: none;
+    background-color: white;
+}
+
+.view-commerce-cart-form .views-field-edit-delete{
+    font-size: 1px;
+    text-indent: -9999px;
+    width: 20px;
+}
+
+.view-commerce-cart-form .views-field-commerce-total{
+    padding-right: 70px;
+}
+
+.view-commerce-cart-form tbody{
+    border: none;    
+}
+
+.view-commerce-cart-form tbody td{
+    padding: 10px;
+    border-bottom: 1px #ECECEC solid;
+    text-align: center;
+    color: #1c1b41;
+    font-family: Verdana, sans-serif;
+    font-size: 13px;
+}
+.view-commerce-cart-form tbody .views-field-line-item-title{
+    text-align: left;
+}
+/**************************** Ofertas *****************************/
+
+.views-field-field-thumbnail-1{
+    text-align: center;
+}
+
+.view-oferta-semana td{
+    padding: 10px;
+  //  border: solid white 1px;
+  //  width: 150px;
+}
+
+.view-oferta-semana td:hover{
+    //border: solid grey 1px;
+}
+
+.views-field-commerce-price{
+    font-size: 17px;
+    color: #FF9C0C;
+    font-weight: bold;
+}
+
+.views-field-title{
+    font-size: 14px;
+}
+
+.views-field-view-node{
+    text-decoration: underline;
+    text-transform: lowercase;
+}
+
+.commerce-add-to-cart input[type="submit"]{
+    background-color: #ff8b01;
+    font-family: 'Quicksand';
+    text-transform: lowercase;
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 3px;
+    margin-top: 5px;
+}
+
+.commerce-add-to-cart{
+    text-align: center;
+}
+
+/***************************** Recetas ***********************************/
+
+.view-receta-destacada .tipo{
+    font-size: 16px;
+    color: #342D7B;
+    margin-bottom: 10px;
+}
+
+.view-receta-destacada .titulo{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.view-receta-destacada .cantidad{
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0px 3px 0px 3px;
+    background-color: #FBBA00;
+    text-transform: uppercase;
+    width: 73px;
+    color: black;
+}
+
+.view-receta-destacada .cantidad{
+    margin-top: 20px;
+}
+
+.view-receta-destacada .descripcion{
+    color: black;
+    font-family: Verdana, sans-serif;
+}
+
+.view-receta-destacada .descripcion p{
+    margin-bottom: 0px;
+}
+
+.view-receta-destacada .more a{
+    font-family: Verdana, sans-serif;
+    color: #ff8b00;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.pane-front-recetas-mas-recetas h2{
+    padding: 5px;
+    background-color: #ECECEC;
+    color: black;
+    font-size: 16px;
+}
+
+.view-mas-recetas .cantidad{
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0px 3px 0px 3px;
+    background-color: #FBBA00;
+    text-transform: uppercase;
+    width: 73px;
+    color: black;
+    float: left;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.view-mas-recetas .more a{
+    font-family: Verdana, sans-serif;
+    color: #ff8b00;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.view-mas-recetas .more{
+    margin-bottom: 10px;
+}
+
+.view-mas-recetas .views-row{
+    margin-top: 10px;
+    border-bottom: solid 1px #BEBEBE;
+}
+
+.view-mas-recetas .views-row-last{
+    border-bottom: none;
+}
+
+.view-mas-recetas .imagen{
+    float: left;
+}
+
+.view-mas-recetas .tipo{
+    color: #342D7B;
+    font-size: 12px;
+    margin-left: 10px;
+    float: left;
+}
+
+.view-mas-recetas .titulo{
+    float: left;
+    color: #342D7B;
+    font-size: 18px;
+    font-weight: bold;
+    width: 280px;
+    margin-left: 10px;
+}
+
+.view-mas-recetas .descripcion{
+    clear: both;
+    color: black;
+    font-family: Verdana, sans-serif;
+    margin: 0px;
+}
+
+#quicktabs-recetas ul li{
+    margin-left: 0px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0px;
+}
+
+#quicktabs-recetas ul{
+    margin-top: 4px;
+}
+
+#quicktabs-recetas ul li a{
+    padding: 5px 7px 5px 7px;
+    background-color: #ECECEC;
+    border: 1px solid #ECECEC;
+}
+
+#quicktabs-recetas ul li a:active{
+    color: white;
+    background-color: #FBBA00;
+}
+
+#quicktabs-container-recetas .imagen{
+    float: left;
+    width: 110px;
+    clear: left;
+    margin-right: 10px;
+}
+
+#quicktabs-container-recetas .tipo{
+    color: #342D7B;
+    font-size: 11px;
+    clear: right;
+}
+
+#quicktabs-container-recetas .titulo{
+    color: #342D7B;
+    font-size: 15px;
+    font-weight: bold;
+    clear: right;
+    text-align: left;
+}
+
+#quicktabs-container-recetas .more a{
+    font-family: Verdana, sans-serif;
+    color: #ff8b00;
+    text-decoration: underline;
+    font-weight: bold;
+    clear: right;
+}
+
+#quicktabs-container-recetas .more{
+    margin-bottom: 20px;
+    width: 155px;
+    float: right;
+}
+
+#quicktabs-container-recetas .views-row{
+    margin-top: 20px;
+    clear: both;
+    border-bottom: solid 1px #BEBEBE;
+    display: inline-block;
+    width: 275px;
+}
+
+/******************************* Detalle Recetas *****************************/
+
+.pade-node-terms{
+    font-size: 16px;
+    color: #342D7B;
+    margin-bottom: 10px;
+}
+
+.pane-node-title h1{
+    margin-top: 0px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #342D7B;
+}
+
+.field-name-field-personas{
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0px 3px 0px 3px;
+    background-color: #FBBA00;
+    text-transform: uppercase;
+    width: 73px;
+    color: black;
+}
+
+.field-name-body{
+    color: black;
+    font-family: Verdana, sans-serif;
+}
+
+.pane-magdalena-facebook-comments{
+    color: #342D7B;
+}
+
+.pane-front-productos-receta-productos h2{
+    padding: 10px;
+    background-color: #ECECEC;
+    margin: 0;
+    margin-left: 15px;
+    width: 133px;
+    color: black;
+}
+
+.view-front-productos td{
+    padding: 10px;
+}
+
+.pane-front-productos-receta-productos .view-front-productos{
+    margin-left: 15px;
+}
+
+.pane-front-productos-receta-productos .view-front-productos .views-row{
+    padding: 10px;
+    margin-right: 2px;
+}
+
+.view-front-productos .views-field-field-thumbnail{
+    text-align: center;
+}
+
+/************************** Detalle Producto *******************************/
+
+
