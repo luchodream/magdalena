@@ -215,7 +215,31 @@ function magdalena_library() {
  * Implements hook_form_alter().
  */
 function magdalena_form_alter(&$form, &$form_state, $form_id) {  
-      //dpm($form_id);
+  //dpm($form_id);
+  switch ($form_id) {
+    case 'commerce_checkout_form_checkout':    
+      $comuna = taxonomy_vocabulary_machine_name_load('comuna');
+      if (!empty($comuna)) {
+        $comunas = taxonomy_get_tree($comuna->vid, 0, NULL, TRUE);
+      }
+      //dpm($comunas);
+      $allowed_days = array();
+      foreach ($comunas as $comuna) {        
+        $fields = field_get_items('taxonomy_term', $comuna, 'field_dias_habiles');
+        foreach ($fields as $field) {
+          $allowed_days[$comuna->tid][] = $field['value'];
+        }       
+      }
+      drupal_add_js(array('allowed_days' => $allowed_days), 'setting');
+      
+      drupal_add_library('system', 'ui.datepicker');
+      $form['#attached']['js'][] = drupal_get_path('module', 'magdalena') . '/js/magdalena_checkout.js';      
+      break;
+    
+    default:
+      # code...
+      break;
+  }
       //dpm($form);
   if (strstr($form_id, 'commerce_cart_add_to_cart_form') || $form_id == 'views_form_commerce_cart_form_default') {
     $form['#attached']['library'][] = array('magdalena', 'jquery_ui_spinner');

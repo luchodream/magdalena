@@ -1,0 +1,118 @@
+<?php
+
+/**
+ * @file
+ * Provides an example payment method for Drupal Commerce for testing and
+ *   development.
+ */
+
+
+/**
+ * Implements hook_commerce_payment_method_info().
+ */
+function magdalena_bank_transfer_commerce_payment_method_info() {
+  $payment_methods = array();
+
+  $payment_methods['magdalena_bank_transfer'] = array(
+    'title' => t('Pago con cheque'),
+    'description' => t('Pago con cheque con campos custom.'),
+    'active' => TRUE,
+  );
+
+  return $payment_methods;
+}
+
+/**
+ * Payment method callback: submit form.
+ */
+function magdalena_bank_transfer_submit_form($payment_method, $pane_values, $checkout_pane, $order) {
+  $form = array();
+
+  // Merge in values from the order.
+  if (!empty($order->data['magdalena_bank_transfer'])) {
+    $pane_values += $order->data['magdalena_bank_transfer'];
+  }
+
+  // Merge in default values.
+  $pane_values += array(
+    'cheque'  => '',
+    'bank'    => '',
+    'account_number' => '',
+  );
+
+  $form['cheque'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Número de cheque'),
+    '#default_value' => $pane_values['cheque'],
+    '#required' => TRUE,
+  );
+
+  $form['bank'] = array(
+    '#type' => 'select',
+    '#title' => t('Banco'),
+    '#default_value' => $pane_values['bank'],
+    '#options' => array(
+      'Banco de Chile' => t('Banco de Chile'),
+      'BCI' => t('BCI'),
+    ),
+    '#required' => TRUE,
+  );
+
+  $form['account_number'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Cuenta corriente'),
+    '#default_value' => $pane_values['account_number'],
+    '#required' => TRUE,
+  );  
+  return $form;
+}
+
+/**
+ * Payment method callback: submit form validation.
+ */
+function magdalena_bank_transfer_submit_form_validate($payment_method, $pane_form, $pane_values, $order, $form_parents = array()) {
+  // Throw an error if a long enough name was not provided.
+  // if (strlen($pane_values['name']) < 2) {
+  //   form_set_error(implode('][', array_merge($form_parents, array('name'))), t('You must enter a name two or more characters long.'));
+  //   return FALSE;
+  // }
+}
+
+/**
+ * Payment method callback: submit form submission.
+ */
+function magdalena_bank_transfer_submit_form_submit($payment_method, $pane_form, $pane_values, $order, $charge) {
+  $order->data['magdalena_bank_transfer'] = $pane_values;
+
+  magdalena_bank_transfer_transaction($payment_method, $order, $charge, array(
+    'cheque'  => $pane_values['cheque'],
+    'bank'    => $pane_values['bank'],
+    'account_number' => $pane_values['account_number'],
+  ));
+}
+
+/**
+ * Creates an example payment transaction for the specified charge amount.
+ *
+ * @param $payment_method
+ *   The payment method instance object used to charge this payment.
+ * @param $order
+ *   The order object the payment applies to.
+ * @param $charge
+ *   An array indicating the amount and currency code to charge.
+ * @param $name
+ *   The name entered on the submission form.
+ */
+function magdalena_bank_transfer_transaction($payment_method, $order, $charge, $data) {
+  $transaction = commerce_payment_transaction_new('magdalena_bank_transfer', $order->order_id);
+  $transaction->instance_id = $payment_method['instance_id'];
+  $transaction->amount = $charge['amount'];
+  $transaction->currency_code = $charge['currency_code'];
+  $transaction->status = COMMERCE_PAYMENT_STATUS_SUCCESS;
+  $transaction->message = 'Número de cheque: @cheque<br/>';
+  $transaction->message.= 'Banco: @bank<br/>';
+  $transaction->message.= 'Cuenta corriente: @account_number';
+  $transaction->message_variables = array('@cheque' => $data['cheque'], '@bank' => $data['bank'], '@account_number' => $data['account_number']);
+
+  commerce_payment_transaction_save($transaction);
+}
