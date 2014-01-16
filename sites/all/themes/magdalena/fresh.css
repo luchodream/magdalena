@@ -85,6 +85,7 @@ body {
    background-repeat: no-repeat;
    font-size: 1px;
    text-indent: -9999px;
+   cursor: pointer;
 }
 
 #block-user-login .form-actions{
@@ -288,6 +289,7 @@ a{
     background-color: #342D7B;
     color: #fff;
     width: 74px;
+    cursor: pointer;
 }
 
 .block-search .form-item, .form-actions{
@@ -434,6 +436,7 @@ a{
 #block-search-form .form-actions input[type="submit"]{
     font-family: 'Quicksand';
     font-weight: bold;
+    cursor: pointer;
 }
 
 .pane-views-oferta-semana-block h2{
@@ -716,6 +719,7 @@ a{
     font-weight: bold;
     padding: 3px;
     margin-top: 5px;
+    cursor: pointer;
 }
 
 .commerce-add-to-cart{
