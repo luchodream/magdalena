@@ -1,0 +1,7 @@
+name = Magdalena Bank Transfer Payment
+description = Provides bank transfer payment method for Magdalena.
+package = Commerce
+dependencies[] = commerce
+dependencies[] = commerce_payment
+core = 7.x
+
