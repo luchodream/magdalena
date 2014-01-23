@@ -141,3 +141,10 @@ function magdalena_form_user_login_block_alter(&$form, &$form_state){
   $form['links']['#markup'] = theme('item_list', array('items' => $items));
   $form['links']['#weight'] = 100;
 }
+
+/**
+ * Returns HTML for a start/end date combination on form.
+ */
+function magdalena_date_combo($variables) {
+  return theme('form_element', $variables);
+}
