@@ -4,17 +4,20 @@
  * Implements hook_init().
  */
 function magdalena_init() {
-   drupal_add_js(array('magdalena' => array('fb_api' => variable_get('fb_api'))), 'setting');    
+  drupal_add_js(array('magdalena' => array('fb_api' => variable_get('fb_api'))), 'setting');
    // Add facebook SDK
-   drupal_add_js('(function(d, s, id){
-           var js, fjs = d.getElementsByTagName(s)[0];
-           if (d.getElementById(id)) {return;}
-           js = d.createElement(s); js.id = id;
-           js.src = "//connect.facebook.net/es_LA/all.js";
-           fjs.parentNode.insertBefore(js, fjs);
-           }(document, \'script\', \'facebook-jssdk\'));', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-   );
-   drupal_add_js(drupal_get_path('module', 'magdalena') . '/js/magdalena.js');
+  drupal_add_js('(function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/es_LA/all.js";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, \'script\', \'facebook-jssdk\'));', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+  );
+  // Add addthis JS
+  drupal_add_js('http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52c0d5620dc992cc', 'external');  
+  // JS for general purpouses
+  drupal_add_js(drupal_get_path('module', 'magdalena') . '/js/magdalena.js');
 }
 
 /*
@@ -91,6 +94,9 @@ function magdalena_block_info() {
   $blocks['shopping_cart']= array(
     'info' => t('Shopping cart'),
   );
+  $blocks['addthis_share']= array(
+    'info' => t('Addthis share'),
+  );  
   return $blocks;
 }
 
@@ -121,7 +127,10 @@ function magdalena_block_view($delta) {
       break;      
     case 'shopping_cart':
       $block['content'] = _magdalena_build_shopping_cart();
-      break;    
+      break;
+    case 'addthis_share':
+      $block['content'] = theme('magdalena_addthis_share');
+      break;        
   }
   return $block;
 }
@@ -186,6 +195,10 @@ function magdalena_theme($existing, $type, $theme, $path) {
       'variables' => array(
         'user' => NULL,
       ),      
+    ),
+    'magdalena_addthis_share' => array(
+      'template' => 'block--addthis',
+      'path' => drupal_get_path('module', 'magdalena') . '/templates',    
     ),       
   );
 }
@@ -215,19 +228,18 @@ function magdalena_library() {
  * Implements hook_form_alter().
  */
 function magdalena_form_alter(&$form, &$form_state, $form_id) {  
-  //dpm($form_id);
+
   switch ($form_id) {
     case 'commerce_checkout_form_checkout':    
       $comuna = taxonomy_vocabulary_machine_name_load('comuna');
       if (!empty($comuna)) {
         $comunas = taxonomy_get_tree($comuna->vid, 0, NULL, TRUE);
       }
-      //dpm($comunas);
-      $allowed_days = array();
+      $allowed_days = new stdClass();
       foreach ($comunas as $comuna) {        
-        $fields = field_get_items('taxonomy_term', $comuna, 'field_dias_habiles');
+        $fields = field_get_items('taxonomy_term', $comuna, 'field_dias_habiles');        
         foreach ($fields as $field) {
-          $allowed_days[$comuna->tid][] = $field['value'];
+          $allowed_days->{$comuna->tid}[] = $field['value'];
         }       
       }
       drupal_add_js(array('allowed_days' => $allowed_days), 'setting');
@@ -240,7 +252,6 @@ function magdalena_form_alter(&$form, &$form_state, $form_id) {
       # code...
       break;
   }
-      //dpm($form);
   if (strstr($form_id, 'commerce_cart_add_to_cart_form') || $form_id == 'views_form_commerce_cart_form_default') {
     $form['#attached']['library'][] = array('magdalena', 'jquery_ui_spinner');
   }
