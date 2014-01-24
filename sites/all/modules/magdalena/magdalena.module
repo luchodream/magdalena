@@ -4,17 +4,20 @@
  * Implements hook_init().
  */
 function magdalena_init() {
-   drupal_add_js(array('magdalena' => array('fb_api' => variable_get('fb_api'))), 'setting');    
+  drupal_add_js(array('magdalena' => array('fb_api' => variable_get('fb_api'))), 'setting');
    // Add facebook SDK
-   drupal_add_js('(function(d, s, id){
-           var js, fjs = d.getElementsByTagName(s)[0];
-           if (d.getElementById(id)) {return;}
-           js = d.createElement(s); js.id = id;
-           js.src = "//connect.facebook.net/es_LA/all.js";
-           fjs.parentNode.insertBefore(js, fjs);
-           }(document, \'script\', \'facebook-jssdk\'));', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-   );
-   drupal_add_js(drupal_get_path('module', 'magdalena') . '/js/magdalena.js');
+  drupal_add_js('(function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/es_LA/all.js";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, \'script\', \'facebook-jssdk\'));', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+  );
+  // Add addthis JS
+  drupal_add_js('http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52c0d5620dc992cc', 'external');  
+  // JS for general purpouses
+  drupal_add_js(drupal_get_path('module', 'magdalena') . '/js/magdalena.js');
 }
 
 /*
@@ -91,6 +94,9 @@ function magdalena_block_info() {
   $blocks['shopping_cart']= array(
     'info' => t('Shopping cart'),
   );
+  $blocks['addthis_share']= array(
+    'info' => t('Addthis share'),
+  );  
   return $blocks;
 }
 
@@ -121,7 +127,10 @@ function magdalena_block_view($delta) {
       break;      
     case 'shopping_cart':
       $block['content'] = _magdalena_build_shopping_cart();
-      break;    
+      break;
+    case 'addthis_share':
+      $block['content'] = theme('magdalena_addthis_share');
+      break;        
   }
   return $block;
 }
@@ -186,6 +195,10 @@ function magdalena_theme($existing, $type, $theme, $path) {
       'variables' => array(
         'user' => NULL,
       ),      
+    ),
+    'magdalena_addthis_share' => array(
+      'template' => 'block--addthis',
+      'path' => drupal_get_path('module', 'magdalena') . '/templates',    
     ),       
   );
 }
