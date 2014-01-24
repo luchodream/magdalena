@@ -20,7 +20,9 @@ function views_slideshow_liquidcarousel_views_slideshow_slideshow_info() {
  * Implements hook_views_slideshow_slideshow_type_form().
  */
 function views_slideshow_liquidcarousel_views_slideshow_slideshow_type_form(&$form, &$form_state, &$view) {
-  if (!$library_paths = _views_slideshow_liquidcarousel_library_path()) {
+  $library = libraries_load('liquidcarousel', 'minified');
+
+  if (empty($library['installed'])) {
     $form['views_slideshow_liquidcarousel']['no_liquidcarousel_js'] = array(
       '#prefix' => '<div style="color: red">',
       '#suffix' => '</div>',
