@@ -115,7 +115,6 @@ a{
 
 #block-magdalena-social-top a{
     text-decoration: none;
-    float: left;
     display: block;
     width: 27px;
     height: 27px;
@@ -170,7 +169,7 @@ a{
 }
 
 #footer .phone .movil small{
-    color: #342D7B;
+    color: #1c1b41;
     margin: 0px;
     font-size: 12px;
 }
@@ -229,6 +228,21 @@ a{
     text-decoration: none;
 }
 
+#block-magdalena-user-menu ul li.user-profile{
+    padding-left: 20px;
+    background: url('images/profile.png') no-repeat;
+}
+
+#block-magdalena-user-menu ul li.user-history{
+    padding-left: 20px;
+    background: url('images/history.png') no-repeat;
+}
+
+#block-magdalena-user-menu ul li.user-logout{
+    padding-left: 20px;
+    background: url('images/logout.png') no-repeat;
+}
+
 /***************************** Contact info top ******************************/
 
 .block-contact-top {
@@ -255,6 +269,38 @@ a{
     margin-left: 3px;
 }
 
+.block-contact-top .phone .number{
+    padding-left: 17px;
+    background: url('images/phone.png') no-repeat;
+    margin-left: 15px;
+}
+
+.block-contact-top .movil .number{
+    padding-left: 17px;
+    padding-bottom: 2px;
+    background: url('images/cell-phone.png') no-repeat;
+}
+
+#footer .phone .number{
+    padding-left: 25px;
+    padding-bottom: 5px;
+    padding-top: 3px;
+    background: url('images/phone-footer.png') no-repeat;
+}
+
+#footer .phone .movil{
+    padding-left: 25px;
+    background: url('images/cell-phone-footer.png') no-repeat;
+    background-position: 0px 4px;
+}
+
+#footer .phone .movil .number{
+    background: none;
+}
+
+#footer .phone .movil .number{
+    background: none;
+}
 /******************************* Block search ***********************************/
 
 .block-search {
@@ -502,29 +548,25 @@ a{
 }
 
 .item-list .pager-first a{
-    background-position-x: 3px;
-    background-position-y: 3px;
+    background-position: 3px 3px;
     background-image: url('images/pager-first.jpg');
     background-repeat: no-repeat;
 }
 
 .item-list .pager-last a{
-    background-position-x: 4px;
-    background-position-y: 3px;
+    background-position: 4px 3px;
     background-image: url('images/pager-last.jpg');
     background-repeat: no-repeat;
 }
 
 .item-list .pager-next a{
-    background-position-x: 4px;
-    background-position-y: 3px;
+    background-position: 4px 3px;
     background-image: url('images/pager-next.jpg');
     background-repeat: no-repeat;
 }
 
 .item-list .pager-previous a{
-    background-position-x: 3px;
-    background-position-y: 3px;
+    background-position: 3px 3px;
     background-image: url('images/pager-previous.jpg');
     background-repeat: no-repeat;
 }
@@ -570,7 +612,7 @@ a{
     padding-bottom: 21px;
     padding-top: 21px;
     background: url('images/blue-arrow.png') no-repeat;
-    background-position-y: 21px;
+    background-position: 0px 21px;
 }
 
 .block-menu-categorias .term-image{
@@ -807,22 +849,9 @@ a{
     margin-right: 0px;
 }
 
-.commerce-line-item-actions input[type="submit"]{
-    background-color: #ff8b01;
-    font-family: 'Quicksand';
-    text-transform: uppercase;
-    border: none;
-    color: white;
-    font-weight: bold;
-    margin-top: 5px;
-    cursor: pointer;
-    font-size: 20px;
-    margin-right: 20px;
-    padding: 10px 15px 10px 15px;
-}
-
 .commerce-line-item-actions #edit-submit{
-    background-color: #BEBEBE;
+    background: #BEBEBE;
+    padding: 10px 15px 10px 15px;
 }
 
 .view-commerce-cart-form .views-field-commerce-total{
@@ -888,7 +917,7 @@ a{
     cursor: pointer;
 }
 
-.commerce-add-to-cart{
+.commerce-add-to-cart .view-front-productos{
     text-align: center;
 }
 
@@ -1288,9 +1317,187 @@ a{
 }
 
 .form-item-commerce-shipping-shipping-service{
-    margin-left: 360px;
+    font-size: 18px;
 }
 
-.page-checkout .clearfix{
+.form-item-commerce-shipping-shipping-service input[type="radio"]{
+    display: none;
+}
+
+.page-checkout .region-content{
     color: black;
+}
+
+/*********************** Tramite Compra *******************************/
+
+#edit-customer-profile-billing label{
+    font-size: 18px;
+    font-weight: normal;
+    float: left;
+    width: 250px;
+    text-align: left;
+}
+
+#edit-customer-profile-billing .date-no-float .date-padding{
+    padding: 0px;
+}
+
+#edit-customer-profile-billing .date-no-float{
+    width: 300px;
+    margin: 0px;
+    float: left;
+    clear: none;
+}
+
+#edit-customer-profile-billing label span{
+    color: black;
+}
+
+.form-select.shipping-recalculation-processed{
+    width: 232px;
+}
+
+.customer_profile_billing .form-item{
+    clear: both;
+}
+
+.customer_profile_billing .form-type-date-text .form-item{
+    clear: none;;
+}
+
+#edit-customer-profile-billing .date-date{
+    float: left;
+}
+
+#edit-customer-profile-billing input{
+    width: 230px;
+    border: solid 1px #BEBEBE;
+    height: 20px;
+}
+
+#edit-customer-profile-billing textarea{
+    width: 232px;
+    border: solid 1px #BEBEBE;
+}
+
+.checkout-buttons .checkout-continue, 
+.commerce-line-item-actions input[type="submit"],
+.node-type-producto .commerce-add-to-cart #edit-submit{
+    background: #ff8b01 url('images/next.png') no-repeat;
+    background-position: right 5px;
+    font-family: 'Quicksand';
+    text-transform: uppercase;
+    border: none;
+    color: white;
+    font-weight: bold;
+    margin-top: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 20px;
+    padding: 10px 50px 10px 15px;
+}
+
+.checkout-buttons .checkout-cancel{
+    background: #BEBEBE url('images/cancel.png') no-repeat;
+    background-position: 10px 10px;
+    font-family: 'Quicksand';
+    text-transform: uppercase;
+    border: none;
+    color: white;
+    font-weight: bold;
+    margin-top: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 20px;
+    padding: 10px 15px 10px 50px;
+}
+
+.checkout-buttons .checkout-cancel:hover{
+    background: #BEBEBE url('images/cancel.png') no-repeat;
+    background-position: 10px 10px;
+    font-family: 'Quicksand';
+    text-transform: uppercase;
+    border: none;
+    color: white;
+    font-weight: bold;
+    margin-top: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 20px;
+    padding: 10px 15px 10px 50px;
+    text-decoration: none;
+}
+
+.page-checkout .form-type-textarea .grippie{
+    display: none;
+}
+
+.page-checkout #edit-buttons{
+    border: none;
+}
+
+/********************** Detalle Producto *************************/
+
+.node-type-producto .pane-node-title h1{
+    line-height: 25px;
+}
+
+.node-type-producto .field-name-commerce-price{
+    font-size: 15px;
+    color: #342D7B;
+}
+
+.node-type-producto .field-name-commerce-price .field-label{
+    font-weight: normal;
+}
+
+.node-type-producto .field-name-commerce-price .field-items{
+    font-weight: bold;
+}
+
+.node-type-producto .commerce-add-to-cart .form-item-quantity{
+    text-align: left;
+    color: #342D7B;
+}
+
+.node-type-producto .commerce-add-to-cart .form-item-quantity label{
+    float: left;
+    font-size: 15px;
+    font-weight: normal;
+    margin-right: 10px;
+}
+
+.node-type-producto #edit-quantity{
+    border: solid 1px #a39fc2;
+    border-radius: 2px;
+    width: 50px;
+    height: 20px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.node-type-producto .ui-spinner-buttons{
+    margin-left: 10px;
+}
+
+.node-type-producto .ui-spinner-button.ui-spinner-up{
+    border: none;
+    cursor: pointer;
+}
+
+.node-type-producto .ui-icon-triangle-1-n{
+    background-image: url('images/flecha-arriba.png');
+    background-color: white;
+    background-position: 2px 2px;
+}
+
+.node-type-producto .ui-spinner-button.ui-spinner-down{
+    border: none;
+    cursor: pointer;
+}
+
+.node-type-producto .ui-icon-triangle-1-s{
+    background-image: url('images/flecha-abajo.png');
+    background-color: white;
+    background-position: 2px 6px;
 }
