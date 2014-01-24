@@ -223,13 +223,14 @@ function magdalena_form_alter(&$form, &$form_state, $form_id) {
         $comunas = taxonomy_get_tree($comuna->vid, 0, NULL, TRUE);
       }
       //dpm($comunas);
-      $allowed_days = array();
+      $allowed_days = new stdClass();
       foreach ($comunas as $comuna) {        
-        $fields = field_get_items('taxonomy_term', $comuna, 'field_dias_habiles');
+        $fields = field_get_items('taxonomy_term', $comuna, 'field_dias_habiles');        
         foreach ($fields as $field) {
-          $allowed_days[$comuna->tid][] = $field['value'];
+          $allowed_days->{$comuna->tid}[] = $field['value'];
         }       
       }
+      dpm($allowed_days);
       drupal_add_js(array('allowed_days' => $allowed_days), 'setting');
       
       drupal_add_library('system', 'ui.datepicker');
