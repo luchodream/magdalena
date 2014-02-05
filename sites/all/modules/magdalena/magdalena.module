@@ -97,6 +97,12 @@ function magdalena_block_info() {
   $blocks['addthis_share']= array(
     'info' => t('Addthis share'),
   );  
+  $blocks['addthis_share_tiny']= array(
+    'info' => t('Addthis share tiny'),
+  );   
+  $blocks['back_button']= array(
+    'info' => t('Back button'),
+  ); 
   return $blocks;
 }
 
@@ -130,7 +136,13 @@ function magdalena_block_view($delta) {
       break;
     case 'addthis_share':
       $block['content'] = theme('magdalena_addthis_share');
-      break;        
+      break;
+    case 'addthis_share_tiny':
+      $block['content'] = theme('magdalena_addthis_share_tiny');
+      break;       
+    case 'back_button':
+      $block['content'] = theme('magdalena_back_button');
+      break;      
   }
   return $block;
 }
@@ -199,7 +211,15 @@ function magdalena_theme($existing, $type, $theme, $path) {
     'magdalena_addthis_share' => array(
       'template' => 'block--addthis',
       'path' => drupal_get_path('module', 'magdalena') . '/templates',    
-    ),       
+    ),
+    'magdalena_addthis_share_tiny' => array(
+      'template' => 'block--addthis-tiny',
+      'path' => drupal_get_path('module', 'magdalena') . '/templates',    
+    ),    
+    'magdalena_back_button' => array(
+      'template' => 'block--back-button',
+      'path' => drupal_get_path('module', 'magdalena') . '/templates',    
+    ),    
   );
 }
 
