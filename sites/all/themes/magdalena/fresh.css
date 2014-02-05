@@ -1107,6 +1107,18 @@ a{
     width: 265px;
 }
 
+.node-type-receta #block-system-main{
+    position: relative;
+}
+
+.node-type-receta .pane-magdalena-addthis-share{
+    position: absolute;
+    top: 0;
+}
+
+.node-type-receta .addthis_toolbox{
+    background-color: transparent;
+}
 /******************************* Detalle Recetas *****************************/
 
 .node-type-receta .pane-node-terms{
@@ -1397,7 +1409,8 @@ a{
     padding: 10px 50px 10px 15px;
 }
 
-.checkout-buttons .checkout-cancel{
+.checkout-buttons .checkout-cancel, .checkout-back.form-submit,
+.checkout-back.form-submit:hover{
     background: #BEBEBE url('images/cancel.png') no-repeat;
     background-position: 10px 10px;
     font-family: 'Quicksand';
@@ -1410,6 +1423,7 @@ a{
     font-size: 20px;
     margin-right: 20px;
     padding: 10px 15px 10px 50px;
+    text-decoration: none;
 }
 
 .checkout-buttons .checkout-cancel:hover{
@@ -1500,4 +1514,47 @@ a{
     background-image: url('images/flecha-abajo.png');
     background-color: white;
     background-position: 2px 6px;
+}
+
+/**************************** Page Checkout Review ****************************/
+.page-checkout-review .checkout-review table{
+    background-color: white;
+}
+
+.page-checkout-review .checkout-review tr.pane-title{
+    font-size: 14px;
+}
+
+.page-checkout-review .checkout-review tr.pane-data{
+    font-size: 14px;
+    background-color: white;
+}
+
+.page-checkout-review .checkout-review tr.pane-data label,
+.page-checkout-review .checkout-review tr.pane-data td{
+    font-size: 14px;
+}
+
+.page-checkout-review .checkout-review tr.pane-data .field-label{
+    float: left;
+}
+
+.page-checkout-review .checkout-review tr.pane-data .field-items{
+    margin-bottom: 5px;
+}
+
+.page-checkout-review .checkout-review td{
+    font-size: 18px;
+}
+
+.page-checkout-review .commerce_payment{
+    width: 610px;
+    font-size: 14px;
+    color: black;
+    margin-top: 30px;
+}
+
+.page-checkout-review .commerce_payment legend{
+    font-size: 14px;
+    font-weight: bold;
 }
