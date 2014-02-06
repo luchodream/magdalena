@@ -68,13 +68,22 @@
           <?php print render($page['footer_fourthcolumn']); ?>
         </div> <!-- /#footer-fourthcolumn -->
       </div> <!-- /#footer -->
-      <?php endif; ?>
+      <?php endif; ?> 
 
-      <?php if ($page['sidebar_second']): ?>
       <div id="page-bottom" class="clearfix">
-        <?php print render($page['page_bottom']); ?>
-      </div> <!-- /#footer -->
-      <?php endif; ?>
-
+        <div id="page-bottom-left">
+          <div class="magdalena-logo">
+            <img src="<?php print drupal_get_path('theme', 'magdalena'); ?>/magdalena-logo.png"/>
+          </div>
+          <div class="magdalena-copyright">
+            <?php print t('Copyright © Granja Magdalena !year', array('!year' => date('Y'))); ?><br/>
+            <?php print t('Todos los derechos reservados'); ?>
+          </div>
+        </div>
+        <div id="page-bottom-right">
+          <div class="webpay-logo"><img src="<?php print drupal_get_path('theme', 'magdalena'); ?>/webpay-footer.png"/></div>
+        </div>        
+      </div> <!-- /#page-bottom -->
+      
     </div> <!-- /#container -->
   </div> <!-- /#wrapper -->
