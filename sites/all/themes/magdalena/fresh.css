@@ -158,8 +158,8 @@ a{
     font-weight: normal;
 }
 
-#footer .phone .number, #footer .phone .movil .number, 
-#footer .phone .movil{
+#footer .phone .number, #footer .movil .number, 
+#footer .movil{
     font-size: 14px;
     padding: 0px;
     color: #d31f1f;
@@ -267,6 +267,7 @@ a{
 
 .block-contact-top .movil small{
     margin-left: 3px;
+    font-weight: bold;
 }
 
 .block-contact-top .phone .number{
@@ -288,7 +289,7 @@ a{
     background: url('images/phone-footer.png') no-repeat;
 }
 
-#footer .phone .movil{
+#footer .movil{
     padding-left: 25px;
     background: url('images/cell-phone-footer.png') no-repeat;
     background-position: 0px 4px;
@@ -491,11 +492,15 @@ a{
     font-size: 24px;
     text-transform: uppercase;
     color: #342D7B;
-    background-image: url('images/linea.png');
+    background-color: white;
+    width: 300px;
+    margin-left: 90px;
 }
 
 .pane-views-oferta-semana-block{
     margin-top: 28px;
+    background: repeat-x url('images/linea2.png') 0px 4px;
+    margin-right: 10px;
 }
 
 .panel-middle{
@@ -661,6 +666,45 @@ a{
 
 #footer .social{
     font-weight: bold;
+}
+
+#page-bottom{
+    background-color: #ECECEC;
+    padding: 10px 40px 0px 40px;
+}
+
+#page-bottom .magdalena-logo{
+    float: left;
+}
+
+#page-bottom .magdalena-copyright{
+    font-family: Verdana, sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #1c1b41;
+    margin: 15px 0px 0px 5px;
+}
+
+#page-bottom .webpay-logo{
+    margin-left: 85px;
+}
+
+#page-bottom #page-bottom-right,
+#page-bottom #page-bottom-left{
+    width: 460px;
+    height: 100px;
+    border-top: 1px #BEBEBE solid;
+}
+
+#page-bottom #page-bottom-left{
+    float: left;
+    margin: 0px;
+    padding-top: 20px;
+}
+
+#page-bottom #page-bottom-right{
+    float: right;    
+    padding-top: 15px;
 }
 
 /******************************* Like Box *******************************/
@@ -971,7 +1015,7 @@ a{
     font-size: 16px;
 }
 
-.view-mas-recetas .cantidad{
+.view-mas-recetas .cantidad, .node-type-producto .views-field-field-personas{
     font-size: 12px;
     font-weight: bold;
     padding: 0px 3px 0px 3px;
@@ -1111,12 +1155,13 @@ a{
     position: relative;
 }
 
-.node-type-receta .pane-magdalena-addthis-share{
+.node-type-receta .pane-magdalena-addthis-share,
+.node-type-consejo .pane-magdalena-addthis-share{
     position: absolute;
     top: 0;
 }
 
-.node-type-receta .addthis_toolbox{
+.node-type-receta .addthis_toolbox, .node-type-consejo .addthis_toolbox{
     background-color: transparent;
 }
 /******************************* Detalle Recetas *****************************/
@@ -1410,7 +1455,7 @@ a{
 }
 
 .checkout-buttons .checkout-cancel, .checkout-back.form-submit,
-.checkout-back.form-submit:hover{
+.checkout-back.form-submit:hover, .node-type-producto .back-button{
     background: #BEBEBE url('images/cancel.png') no-repeat;
     background-position: 10px 10px;
     font-family: 'Quicksand';
@@ -1452,16 +1497,64 @@ a{
 
 /********************** Detalle Producto *************************/
 
-.node-type-producto .pane-node-title h1{
-    line-height: 25px;
+.panel-2col-sidebar-left .panel-col-first{
+    width: 315px;
+    margin-top: 10px;
 }
 
-.node-type-producto .field-name-commerce-price{
+.panel-2col-sidebar-left .panel-col-last{
+    width: 390px;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+.node-type-producto .pane-entity-field.pane-node-body{
+    border-top: 2px #d1d1d1 solid;
+    margin-top: 20px;
+    color: #494949;
+    margin-bottom: 20px;
+}
+
+.node-type-producto .pane-entity-field.pane-node-body p{
+    color: #8a8a8a;
+    font-size: 12px;
+    width: 380px;
+    height: 200px;
+    overflow-y: scroll;
+}
+
+.node-type-producto .pane-entity-field h2{
+    margin-top: 5px;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.node-type-producto .pane-node-title h1{
+    line-height: 25px;
+    margin-bottom: 30px;
+}
+
+.node-type-producto .field-name-commerce-price,
+.node-type-producto .field-name-field-precio-normal{
     font-size: 15px;
     color: #342D7B;
 }
 
-.node-type-producto .field-name-commerce-price .field-label{
+.node-type-producto .field-name-field-precio-normal .field-items{
+    margin-right: 20px;
+}
+
+.node-type-producto .field-name-commerce-price .field-items{
+    font-size: 17px;
+}
+
+.node-type-producto .field-name-field-precio-normal .field-items,
+.node-type-producto .field-name-field-precio-normal .field-label{
+    float: left;
+}
+
+.node-type-producto .field-name-commerce-price .field-label,
+.node-type-producto .field-name-field-precio-normal .field-label{
     font-weight: normal;
 }
 
@@ -1472,6 +1565,7 @@ a{
 .node-type-producto .commerce-add-to-cart .form-item-quantity{
     text-align: left;
     color: #342D7B;
+    margin-top: 30px;
 }
 
 .node-type-producto .commerce-add-to-cart .form-item-quantity label{
@@ -1516,9 +1610,111 @@ a{
     background-position: 2px 6px;
 }
 
+.node-type-producto .quality-text{
+    width: 120px;
+    font-family: Verdana, sans-serif;
+    font-weight: bold;
+    color: black;
+    padding: 16px 0px 16px 95px;
+    background: url('images/calidad-certificada.png') no-repeat;
+}
+
+.node-type-producto .quality-text span{
+    color: #91b200;
+    font-weight: bold;
+}
+
+.node-type-producto .addthis-product-share{
+    width: 150px;
+    margin-top: 10px;
+    clear: left;
+}
+
+.node-type-producto .addthis-product-like{
+    width: 150px;
+    float: right;
+    margin-bottom: 30px;
+}
+
+.node-type-producto .addthis-product-like .atclear,
+.node-type-producto .addthis-product-share .atclear{
+    clear: none;
+}
+
+.node-type-producto .quality-wrapper{
+    clear: both;
+}
+
+.node-type-producto .panel-bottom .pane-title{
+    text-transform: uppercase;
+    color: #342D7B;
+    text-align: center;
+    margin-top: 50px;
+    background: white;
+    margin-right: 20px;
+    width: 370px;
+    margin-left: 170px;
+}
+
+.node-type-producto .pane-front-productos-recetas-pane-productos-recetas{
+    background: repeat-x url('images/linea2.png') 0px 4px;
+    margin-right: 20px;
+}
+
+.node-type-producto .liquid{
+    color: #1c1b41;
+    width: 736px;
+}
+
+.node-type-producto .liquid .previous,
+.node-type-producto .liquid .next{
+    margin-top: 60px;
+    height: 60px;
+    font-size: 1px;
+    text-indent: -9999px;
+}
+
+.node-type-producto .liquid .next{
+    margin-right: 20px;
+    background: no-repeat url('images/slide-next.png') 0px 0px;
+}
+
+.node-type-producto .liquid .previous{
+    background: no-repeat url('images/slide-previous.png') 25px 0px;
+}
+
+.node-type-producto .liquid .views-field-view-node a{
+    color: #342D7B;
+}
+
+.node-type-producto .liquid li a{
+    color: #1c1b41;
+}
+
+.node-type-producto .liquid li{
+    width: 131px;
+    padding: 0px;
+    height: 210px;
+}
+
+.node-type-producto .liquid li .views-field-field-thumbnail{
+    text-align: center;
+}
+
+.node-type-producto .liquid li .views-field-field-tipo-receta{
+    color: #1c1b41;
+}
+
+.node-type-producto .views-field-field-personas{
+    margin-left: 0px;
+    float: none;
+    clear: none;
+}
+
 /**************************** Page Checkout Review ****************************/
-.page-checkout-review .checkout-review table{
+.page-checkout-review table.checkout-review{
     background-color: white;
+    width: 630px;
 }
 
 .page-checkout-review .checkout-review tr.pane-title{
@@ -1557,4 +1753,98 @@ a{
 .page-checkout-review .commerce_payment legend{
     font-size: 14px;
     font-weight: bold;
+}
+
+/*************************** Pedidos ******************************/
+
+.page-user-orders .view-id-commerce_user_orders .views-table thead,
+.page-user-orders .view-commerce-line-item-table .views-table thead{
+    font-size: 14px;
+    color: black;
+}
+
+.page-user-orders .view-id-commerce_user_orders .views-table,
+.page-user-orders .view-commerce-line-item-table .views-table{
+    width: 700px;
+}
+
+.page-user-orders .view-id-commerce_user_orders .views-table thead tr,
+.page-user-orders .view-commerce-line-item-table .views-table thead tr{
+    background-color: #ECECEC;
+}
+
+.page-user-orders .view-id-commerce_user_orders .views-table thead a{
+    color: black;
+}
+
+.page-user-orders .view-id-commerce_user_orders .views-table tbody tr,
+.page-user-orders .view-commerce-line-item-table .views-table tbody tr,
+.page-user-orders .commerce-price-formatted-components tbody tr{
+    background-color: white;
+    font-size: 12px;
+    color: black;
+}
+
+.page-user-orders .view-id-commerce_user_orders .views-field-order-number a{
+    font-weight: bold;
+    color: black;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.page-user-orders .view-id-commerce_user_orders td.active{
+    background-color: transparent;
+}
+
+.page-user-orders .view-id-commerce_user_orders thead tr th.views-field,
+.page-user-orders .view-commerce-line-item-table thead tr th.views-field{
+    border: none;
+}
+
+.page-user-orders .view-id-commerce_user_orders th.views-field-order-number,
+.page-user-orders .view-id-commerce_user_orders th.views-field-status{
+    width: 90px;
+    text-align: center;
+}
+
+/************************** Detalle Pedido *********************************/
+.page-user-orders .commerce-price-formatted-components{
+    margin: 20px 0px 0px 400px;
+    text-align: right;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.page-user-orders .commerce-price-formatted-components tr.odd,
+.page-user-orders .commerce-price-formatted-components tbody,
+.page-user-orders .commerce-price-formatted-components 
+.component-type-commerce-price-formatted-amount td,
+.page-user-orders .commerce-price-formatted-components 
+.component-type-flat-rate-envio-standard{
+    border: none;
+}
+
+.page-user-orders .commerce-price-formatted-components 
+.component-type-commerce-price-formatted-amount{
+    font-size: 14px;
+}
+
+.page-user-orders .field-name-commerce-customer-billing{
+    width: 600px;
+    margin-top: 20px;
+    font-size: 14px;
+    color: black;
+}
+
+.page-user-orders .field-name-commerce-customer-billing .field-label{
+    background-color: #ECECEC;
+    padding-left: 10px;
+}
+
+.page-user-orders .field-name-commerce-customer-billing 
+.field-items .field-label{
+    background-color: white;
+    float: left;
+    margin-right: 5px;
 }
