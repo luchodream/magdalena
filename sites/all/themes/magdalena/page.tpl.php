@@ -73,7 +73,7 @@
       <div id="page-bottom" class="clearfix">
         <div id="page-bottom-left">
           <div class="magdalena-logo">
-            <img src="<?php print drupal_get_path('theme', 'magdalena'); ?>/magdalena-logo.png"/>
+            <img src="<?php print url(drupal_get_path('theme', 'magdalena') . '/images/magdalena-logo.png', array('absolute' => TRUE)); ?>"/>
           </div>
           <div class="magdalena-copyright">
             <?php print t('Copyright © Granja Magdalena !year', array('!year' => date('Y'))); ?><br/>
@@ -81,7 +81,7 @@
           </div>
         </div>
         <div id="page-bottom-right">
-          <div class="webpay-logo"><img src="<?php print drupal_get_path('theme', 'magdalena'); ?>/webpay-footer.png"/></div>
+          <div class="webpay-logo"><img src="<?php print url(drupal_get_path('theme', 'magdalena') . '/images/webpay-footer.png', array('absolute' => TRUE)); ?>"/></div>
         </div>        
       </div> <!-- /#page-bottom -->
       
