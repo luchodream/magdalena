@@ -1,0 +1,81 @@
+<?php
+
+/**
+ * Returns the number of uses for this coupon. If any order references a coupon
+ * that counts as a "use."
+ *
+ * @param $coupon_id
+ *   Coupon id to check.
+ *
+ * @return integer
+ *   Returns number of uses of the coupon in all orders.
+ */
+function commerce_coupon_usage_get_number_of_uses($coupon_id) {
+  $query = new EntityFieldQuery();
+  return $query
+    ->entityCondition('entity_type', 'commerce_order')
+    ->fieldCondition('commerce_coupons', 'target_id', $coupon_id, '=')
+    ->count()
+    ->execute();
+}
+
+/*
+ * Implements hook_flush_caches().
+ */
+function commerce_coupon_usage_flush_caches() {
+  _commerce_coupon_install_inline_conditions_field();
+}
+
+/*
+ * Implements hook_inline_conditions_info().
+ */
+function commerce_coupon_usage_inline_conditions_info() {
+  // Usage module only runs its conditions when the user is attempting to redeem
+  // a coupon, which we call the "pre-redeem" phase.
+  $conditions['commerce_coupon_usage_evaluate_usage'] = array(
+    'label' => t('Maximum usage'),
+    'entity type' => 'commerce_coupon',
+    'callbacks' => array(
+      'configure' => 'commerce_coupon_usage_evaluate_usage_configure',
+      'build' => 'commerce_coupon_usage_evaluate_usage_build',
+    ),
+  );
+  
+  return $conditions;
+}
+
+/*
+ * Inline conditions build callback: evaluate max usage for coupon
+ */
+function commerce_coupon_usage_evaluate_usage_build($coupon, $max_usage) {
+  $uses = commerce_coupon_usage_get_number_of_uses($coupon->coupon_id);
+  
+  if ($uses >= $max_usage) {
+    // Set an error message in this static variable.
+    $error = &drupal_static('commerce_coupon_error_' . $coupon->code);
+    $error = t('Coupon has exceeded maximum number of uses.');
+  }
+  else {
+    return TRUE;
+  }
+}
+
+/*
+ * Inline conditions configure callback: evaluate max usage for coupon
+ */
+function commerce_coupon_usage_evaluate_usage_configure($settings) {
+  // Why is this necessary? 
+  if (is_string($settings)) {
+    $settings = unserialize($settings);
+  }
+  
+  $form['max_usage'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Maximum usage'),
+    '#default_value' => !empty($settings['max_usage']) ? $settings['max_usage'] : '',
+    '#element_validate' => array('element_validate_integer_positive'),
+    '#required' => TRUE,
+  );
+
+  return $form;
+}
