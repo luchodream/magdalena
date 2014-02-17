@@ -32,7 +32,7 @@ function magdalena_menu() {
     'type' => MENU_CALLBACK,
   );
   $items['admin/magdalena'] = array(
-    'title' => 'Compraventa',
+    'title' => 'Administracion General',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('magdalena_global_settings_form'),
     'access arguments' => array('administer magdalena'),
@@ -146,6 +146,20 @@ function magdalena_block_view($delta) {
   }
   return $block;
 }
+
+/**
+ * Implements hook_permission().
+ * @return type
+ */
+function magdalena_permission() {
+  return array(
+    'administer magdalena' => array(
+      'title' => t('Administrar Magdalena'),
+      'description' => t('Perform administration tasks for Magdalena.'),
+    ),
+  );
+}
+
 
 /**
  * Helper: build shopping cart
