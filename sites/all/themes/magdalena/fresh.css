@@ -529,12 +529,12 @@ a{
     width: 23px;
     height: 23px;
     margin: 0px;
-    float: left;
     margin-left: -1px;
 }
 
 .item-list .pager{
     margin: auto;
+    margin-top: 25px;
 }
 
 .item-list .pager .pager-current{
@@ -1102,7 +1102,7 @@ a{
     border: 1px solid #ECECEC;
 }
 
-#quicktabs-recetas ul li a:active{
+#quicktabs-recetas ul li a:active, #quicktabs-recetas ul li.active a{
     color: white;
     background-color: #FBBA00;
 }
@@ -1286,7 +1286,7 @@ a{
     border: 1px solid #ECECEC;
 }
 
-#quicktabs-consejos ul li a:active{
+#quicktabs-consejos ul li a:active, #quicktabs-consejos ul li.active a{
     color: white;
     background-color: #FBBA00;
 }
