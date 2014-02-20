@@ -3,7 +3,7 @@
 /**
  * Override of theme_breadcrumb().
  */
-function magdalena_breadcrumb($variables) {
+function magdalena_theme_breadcrumb($variables) {
   $breadcrumb = $variables['breadcrumb'];
 
   if (!empty($breadcrumb)) {
@@ -19,9 +19,9 @@ function magdalena_breadcrumb($variables) {
 /**
  * Override or insert variables into the html template.
  */
-function magdalena_preprocess_html(&$vars) {
+function magdalena_theme_preprocess_html(&$vars) {
   // Toggle fixed or fluid width.
-  if (theme_get_setting('magdalena_width') == 'fluid') {
+  if (theme_get_setting('magdalena_theme_width') == 'fluid') {
     $vars['classes_array'][] = 'fluid-width';
   }
   // Add conditional CSS for IE6.
@@ -31,7 +31,7 @@ function magdalena_preprocess_html(&$vars) {
 /**
  * Override or insert variables into the page template.
  */
-function magdalena_preprocess_page(&$vars) {
+function magdalena_theme_preprocess_page(&$vars) {
   // Remove title on front page
   if(drupal_is_front_page()) $vars['title'] = '';
 
@@ -98,21 +98,21 @@ function magdalena_preprocess_page(&$vars) {
 /**
  * Override or insert variables into the node template.
  */
-function magdalena_preprocess_node(&$vars) {
+function magdalena_theme_preprocess_node(&$vars) {
   $vars['submitted'] = $vars['date'] . ' — ' . $vars['name'];
 }
 
 /**
  * Override or insert variables into the comment template.
  */
-function magdalena_preprocess_comment(&$vars) {
+function magdalena_theme_preprocess_comment(&$vars) {
   $vars['submitted'] = $vars['created'] . ' — ' . $vars['author'];
 }
 
 /**
  * Override or insert variables into the block template.
  */
-function magdalena_preprocess_block(&$vars) {
+function magdalena_theme_preprocess_block(&$vars) {
   $vars['title_attributes_array']['class'][] = 'title';
   $vars['classes_array'][] = 'clearfix';
 }
@@ -120,7 +120,7 @@ function magdalena_preprocess_block(&$vars) {
 /**
  * Override or insert variables into the region template.
  */
-function magdalena_preprocess_region(&$vars) {
+function magdalena_theme_preprocess_region(&$vars) {
   if ($vars['region'] == 'header') {
     $vars['classes_array'][] = 'clearfix';
   }
@@ -129,7 +129,7 @@ function magdalena_preprocess_region(&$vars) {
 /**
  *
  */
-function magdalena_form_user_login_block_alter(&$form, &$form_state){
+function magdalena_theme_form_user_login_block_alter(&$form, &$form_state){
   $form['name']['#title'] = t('Rut');
   $form['pass']['#title'] = t('Clave');
   $item = array();
@@ -145,6 +145,6 @@ function magdalena_form_user_login_block_alter(&$form, &$form_state){
 /**
  * Returns HTML for a start/end date combination on form.
  */
-function magdalena_date_combo($variables) {
+function magdalena_theme_date_combo($variables) {
   return theme('form_element', $variables);
 }
