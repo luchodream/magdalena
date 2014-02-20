@@ -790,7 +790,8 @@ a{
     margin-top: 30px;
 }
 
-.view-commerce-cart-form th{
+.view-commerce-cart-form th,
+.view-commerce-cart-summary th{
     text-transform: uppercase;
     color: #1c1b41;
     font-family: Verdana, sans-serif;
@@ -801,11 +802,13 @@ a{
     border: none;
 }
 
-.view-commerce-cart-form table{
+.view-commerce-cart-form table,
+.view-commerce-cart-summary .views-table{
     width: 718px;
 }
 
-.view-commerce-cart-form tr{
+.view-commerce-cart-form tr,
+.view-commerce-cart-summary tr{
     border: none;
     background-color: white;
 }
@@ -898,15 +901,18 @@ a{
     padding: 10px 15px 10px 15px;
 }
 
-.view-commerce-cart-form .views-field-commerce-total{
+.view-commerce-cart-form .views-field-commerce-total,
+.view-commerce-cart-summary .views-field-commerce-total{
     padding-right: 70px;
 }
 
-.view-commerce-cart-form tbody{
+.view-commerce-cart-form tbody,
+.view-commerce-cart-summary tbody{
     border: none;    
 }
 
-.view-commerce-cart-form tbody td{
+.view-commerce-cart-form tbody td,
+.view-commerce-cart-summary tbody td{
     padding: 10px;
     border-bottom: 1px #ECECEC solid;
     text-align: center;
@@ -914,7 +920,8 @@ a{
     font-family: Verdana, sans-serif;
     font-size: 13px;
 }
-.view-commerce-cart-form tbody .views-field-line-item-title{
+.view-commerce-cart-form tbody .views-field-line-item-title,
+.view-commerce-cart-summary tbody .views-field-line-item-title{
     text-align: left;
 }
 
@@ -949,7 +956,8 @@ a{
     text-transform: lowercase;
 }
 
-.commerce-add-to-cart input[type="submit"]{
+.commerce-add-to-cart input[type="submit"],
+#commerce-checkout-coupon-ajax-wrapper input[type="submit"]{
     background-color: #ff8b01;
     font-family: 'Quicksand';
     text-transform: lowercase;
@@ -1356,7 +1364,7 @@ a{
 }
 
 .page-checkout .views-table{
-    width: 600px;
+    width: 718px;
     color: black;
 }
 
@@ -1370,7 +1378,7 @@ a{
 }
 
 .commerce-order-handler-area-order-total .commerce-price-formatted-components{
-    margin-left: 360px;
+    margin-left: 383px;
 }
 
 .form-item-commerce-shipping-shipping-service{
@@ -1387,7 +1395,8 @@ a{
 
 /*********************** Tramite Compra *******************************/
 
-#edit-customer-profile-billing label{
+#edit-customer-profile-billing label,
+#commerce-checkout-coupon-ajax-wrapper .commerce_coupon label{
     font-size: 18px;
     font-weight: normal;
     float: left;
@@ -1395,7 +1404,7 @@ a{
     text-align: left;
 }
 
-#edit-customer-profile-billing .date-no-float .date-padding{
+#edit-customer-profile-billing .container-inline-date .date-padding{
     padding: 0px;
 }
 
@@ -1426,10 +1435,26 @@ a{
     float: left;
 }
 
-#edit-customer-profile-billing input{
+#edit-customer-profile-billing input,
+#commerce-checkout-coupon-ajax-wrapper input{
     width: 230px;
     border: solid 1px #BEBEBE;
     height: 20px;
+}
+
+#commerce-checkout-coupon-ajax-wrapper .commerce_coupon .form-item{
+    float: left;
+}
+
+#commerce-checkout-coupon-ajax-wrapper input[type="submit"]{
+    width: 120px;
+    margin-top: 12px;
+    height: 24px;
+    background-color: #8a8a8a;
+}
+
+#commerce-checkout-coupon-ajax-wrapper .description{
+    margin-left: 250px;
 }
 
 #edit-customer-profile-billing textarea{
@@ -1712,6 +1737,14 @@ a{
 }
 
 /**************************** Page Checkout Review ****************************/
+.page-checkout-review .views-table{
+    width: 600px;
+}
+
+.page-checkout-review .commerce-price-formatted-components{
+    margin-left: 326px;
+}
+
 .page-checkout-review table.checkout-review{
     background-color: white;
     width: 630px;
@@ -1728,7 +1761,7 @@ a{
 
 .page-checkout-review .checkout-review tr.pane-data label,
 .page-checkout-review .checkout-review tr.pane-data td{
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .page-checkout-review .checkout-review tr.pane-data .field-label{
