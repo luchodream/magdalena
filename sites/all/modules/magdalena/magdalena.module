@@ -36,8 +36,22 @@ function magdalena_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('magdalena_global_settings_form'),
     'access arguments' => array('administer magdalena'),
-    'type' => MENU_CALLBACK,
+    'type' => MENU_NORMAL_ITEM,
   );
+  $items['admin/holidays/add'] = array(
+    'title' => 'Agregar Feriado',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('magdalena_add_holiday_form'),
+    'access arguments' => array('administer holidays'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/holidays/delete/%'] = array(
+    'title' => 'Eliminar Feriado',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('magdalena_delete_holiday_form', 3),
+    'access arguments' => array('administer holidays'),
+    'type' => MENU_CALLBACK,
+  );    
   return $items;
 }
 
@@ -157,7 +171,93 @@ function magdalena_permission() {
       'title' => t('Administrar Magdalena'),
       'description' => t('Perform administration tasks for Magdalena.'),
     ),
+    'administer holidays' => array(
+      'title' => t('Administrar Feriados'),
+      'description' => t('Administer holidays for the site.'),
+    ),    
   );
+}
+
+/**
+ * 
+ */
+function magdalena_add_holiday_form($form, &$form_state) {
+  $form['title'] = array(
+    '#type'  => 'textfield', 
+    '#title' => t('Title'),
+  );
+  $form['day'] = array(
+    '#type'  => 'select', 
+    '#title' => t('Day'),
+    '#options' => array_combine(range(1,31), range(1,31)),
+  );
+  $form['month'] = array(
+    '#type'  => 'select', 
+    '#title' => t('Month'),
+    '#options' => array(
+        1 => t('January'), 2 => t('February'), 3 => t('March'),
+        4 => t('April'), 5 => t('May'), 6 => t('June'),
+        7 => t('July'), 8 => t('August'), 9 => t('September'),
+        10 => t('October'), 11 => t('November'), 12 => t('December'),
+    ),
+  );
+  $form['submit'] = array(
+    '#type'  => 'submit', 
+    '#value' => t('Add'),
+  );
+  return $form;
+}
+
+/**
+ * Validate handler for magdalena_add_holiday_form
+ */
+function magdalena_add_holiday_form_validate($form, &$form_state) {
+  if(!in_array($form_state['values']['day'], range(1, 31))){
+    form_set_error('day', t('Día no válido'));
+  }
+  if(!in_array($form_state['values']['month'], range(1, 12))){
+    form_set_error('month', t('Mes no válido'));
+  }  
+}
+
+/**
+ * Submit handler for magdalena_add_holiday_form
+ */
+function magdalena_add_holiday_form_submit($form, &$form_state) {
+  $fields = array(
+      'day' => $form_state['values']['day'], 
+      'month' => $form_state['values']['month'], 
+      'title' => $form_state['values']['title']
+  );
+  drupal_write_record('magdalena_holidays', $fields);
+  drupal_set_message(t('Feriado agregado correctamente'));
+}
+
+
+/**
+ *
+ */
+function magdalena_delete_holiday_form($form, &$form_state, $hid){
+  $form_state['storage']['hid'] = $hid;
+  $form['help'] = array(
+    '#markup' => t('¿Esta seguro que desea realizar esta acción?'),
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Delete'),
+  );
+  return $form;
+}
+
+/**
+ * Submit handler for magdalena_delete_holiday_form
+ */
+function magdalena_delete_holiday_form_submit($form, &$form_state) {
+  db_delete('magdalena_holidays')
+    ->condition('hid', $form_state['storage']['hid'])
+    ->execute();
+  drupal_set_message(t('Feriado eliminado correctamente'));
+  $form_state['redirect'] = 'admin/holidays';
 }
 
 
@@ -281,12 +381,18 @@ function magdalena_form_alter(&$form, &$form_state, $form_id) {
       drupal_add_library('system', 'ui.datepicker');
       $form['#attached']['js'][] = drupal_get_path('module', 'magdalena') . '/js/magdalena_checkout.js';      
       break;
-    
-    default:
-      # code...
-      break;
   }
   if (strstr($form_id, 'commerce_cart_add_to_cart_form') || $form_id == 'views_form_commerce_cart_form_default') {
     $form['#attached']['library'][] = array('magdalena', 'jquery_ui_spinner');
   }
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function magdalena_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'magdalena'),
+  );
 }

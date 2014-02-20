@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function magdalena_schema() {
+  $schema['magdalena_holidays'] = array(
+      'description' => 'The base table for holidays.',
+      'fields' => array(
+        'hid' => array(
+          'description' => 'The primary identifier for a holiday.',
+          'type' => 'serial',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ),
+        // Defaults to NULL in order to avoid a brief period of potential
+        // deadlocks on the index.
+        'day' => array(
+          'description' => 'The day of the holiday.',
+          'type' => 'int',
+          'size' => 'tiny',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ),
+        'month' => array(
+          'description' => 'The month of the holiday.',
+          'type' => 'int',
+          'size' => 'tiny',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ),        
+        'title' => array(
+          'description' => 'The title of this node, always treated as non-markup plain text.',
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => TRUE,
+          'default' => '',
+        ),  
+      ),
+      'primary key' => array('hid'),
+    );
+  return $schema;
+}
+
