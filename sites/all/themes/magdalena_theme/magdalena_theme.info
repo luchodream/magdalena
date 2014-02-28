@@ -26,5 +26,8 @@ regions[page_bottom] = Page bottom
 stylesheets[all][] = fresh.css
 stylesheets[print][] = print.css
 
+; Scripts
+scripts[] = js/main.js
+
 ; Panels layouts. You can place multiple layouts under the "layouts" folder.
 plugins[panels][layouts] = layouts
