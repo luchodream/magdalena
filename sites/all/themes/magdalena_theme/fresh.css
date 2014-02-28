@@ -1159,7 +1159,8 @@ a{
     width: 265px;
 }
 
-.node-type-receta #block-system-main{
+.node-type-receta #block-system-main,
+.node-type-consejo #block-system-main{
     position: relative;
 }
 
