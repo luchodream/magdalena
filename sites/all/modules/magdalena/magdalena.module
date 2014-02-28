@@ -5,6 +5,8 @@
  */
 function magdalena_init() {
   drupal_add_js(array('magdalena' => array('fb_api' => variable_get('fb_api'))), 'setting');
+
+  drupal_add_library('magdalena', 'jquery_ui_spinner');
    // Add facebook SDK
   drupal_add_js('(function(d, s, id){
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -36,14 +38,14 @@ function magdalena_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('magdalena_global_settings_form'),
     'access arguments' => array('administer magdalena'),
-    'type' => MENU_NORMAL_ITEM,
+    'type' => MENU_CALLBACK,
   );
   $items['admin/holidays/add'] = array(
     'title' => 'Agregar Feriado',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('magdalena_add_holiday_form'),
     'access arguments' => array('administer holidays'),
-    'type' => MENU_NORMAL_ITEM,
+    'type' => MENU_CALLBACK,
   );
   $items['admin/holidays/delete/%'] = array(
     'title' => 'Eliminar Feriado',
@@ -381,9 +383,6 @@ function magdalena_form_alter(&$form, &$form_state, $form_id) {
       drupal_add_library('system', 'ui.datepicker');
       $form['#attached']['js'][] = drupal_get_path('module', 'magdalena') . '/js/magdalena_checkout.js';      
       break;
-  }
-  if (strstr($form_id, 'commerce_cart_add_to_cart_form') || $form_id == 'views_form_commerce_cart_form_default') {
-    $form['#attached']['library'][] = array('magdalena', 'jquery_ui_spinner');
   }
 }
 
