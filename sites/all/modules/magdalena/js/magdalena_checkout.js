@@ -7,18 +7,32 @@
       		dateFormat: 'dd/mm/yy',
       		maxDate: '+2w',
       		minDate: '+2d',
-			beforeShowDay: function(date) {
-				var comuna 		= $('[name="customer_profile_billing[field_comuna][und]"]').val();
-				var allowedDays = [];
-				if(typeof Drupal.settings.allowed_days[comuna] !== 'undefined'){
-					allowedDays = Drupal.settings.allowed_days[comuna];
-				}
-				//console.log(allowedDays);
-				if($.inArray(date.getDay().toString(), allowedDays) > -1){
-					return [true, 'allowed-day', Drupal.t('Día permitido')];
-				}else{
-					return [false, 'not-allowed-day', Drupal.t('Día no permitido')];
-				}							
+    			beforeShowDay: function(date) {
+    				var comuna 		= $('[name="customer_profile_billing[field_comuna][und]"]').val();
+    				var allowedDays = [];
+    				if(typeof Drupal.settings.allowed_days[comuna] !== 'undefined'){
+    					allowedDays = Drupal.settings.allowed_days[comuna];
+    				}
+            // Get holidays
+            var isHoliday     = false;
+            var holidayTitle  = '';
+            $.each(Drupal.settings.holidays, function(key, value){
+              //console.log(value);
+              if(date.getDate().toString() == value.day && date.getMonth().toString() == value.month - 1){
+                isHoliday     = true;
+                holidayTitle  = Drupal.t(value.title); 
+                return false;                         
+              }                 
+            });
+            if(isHoliday){
+              return [false, 'not-allowed-day', holidayTitle];
+            }            
+    				//console.log(allowedDays);
+    				if($.inArray(date.getDay().toString(), allowedDays) > -1){
+    					return [true, 'allowed-day', Drupal.t('Día permitido')];
+    				}else{
+    					return [false, 'not-allowed-day', Drupal.t('Día no permitido')];
+    				}				
 	        },      		
       	});
       })

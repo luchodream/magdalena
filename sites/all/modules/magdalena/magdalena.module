@@ -378,7 +378,9 @@ function magdalena_form_alter(&$form, &$form_state, $form_id) {
           $allowed_days->{$comuna->tid}[] = $field['value'];
         }       
       }
-      drupal_add_js(array('allowed_days' => $allowed_days), 'setting');
+      // Get holidays
+      $holidays = _magdalena_get_holidays();
+      drupal_add_js(array('allowed_days' => $allowed_days, 'holidays' => $holidays), 'setting');
       
       drupal_add_library('system', 'ui.datepicker');
       $form['#attached']['js'][] = drupal_get_path('module', 'magdalena') . '/js/magdalena_checkout.js';      
@@ -394,4 +396,13 @@ function magdalena_views_api() {
     'api' => 3,
     'path' => drupal_get_path('module', 'magdalena'),
   );
+}
+
+/**
+ * Get días no permitidos
+ */
+function _magdalena_get_holidays(){
+  $query = db_select('magdalena_holidays', 'h')->fields('h');
+  $query->addExpression("CONCAT(h.day, '/', h.month)", 'date');
+  return $query->range(0, 365)->execute()->fetchAll();
 }
