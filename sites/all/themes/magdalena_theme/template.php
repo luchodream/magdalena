@@ -20,10 +20,19 @@ function magdalena_theme_breadcrumb($variables) {
  * Override or insert variables into the html template.
  */
 function magdalena_theme_preprocess_html(&$vars) {
-  // Toggle fixed or fluid width.
-  if (theme_get_setting('magdalena_theme_width') == 'fluid') {
-    $vars['classes_array'][] = 'fluid-width';
-  }
+  drupal_add_library('magdalena', 'jquery_ui_spinner');
+   // Add facebook SDK
+  drupal_add_js('(function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/es_LA/all.js";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, \'script\', \'facebook-jssdk\'));', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+  );
+  // Add addthis JS
+  drupal_add_js('http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52c0d5620dc992cc', 'external');  
+
   // Add conditional CSS for IE6.
   drupal_add_css(path_to_theme() . '/fix-ie.css', array('group' => CSS_THEME, 'browsers' => array('IE' => 'lt IE 7', '!IE' => FALSE), 'preprocess' => FALSE));
 }
@@ -130,7 +139,7 @@ function magdalena_theme_preprocess_region(&$vars) {
  *
  */
 function magdalena_theme_form_user_login_block_alter(&$form, &$form_state){
-  $form['name']['#title'] = t('Rut');
+  $form['name']['#title'] = 'Email';
   $form['pass']['#title'] = t('Clave');
   $item = array();
   $items[] = l(t('Olvidé mi clave'), 'user/password', array('attributes' => array('title' => t('If you forgot your password, click to request a new password via e-mail.'))));

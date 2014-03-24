@@ -106,6 +106,10 @@ a{
     display: inline-block;
 }
 
+.not-logged-in.page-user #block-magdalena-social-top{
+    margin-top: 20px;
+}
+
 #block-magdalena-social-top .text{
     font-size: 14px;
     float: left;
@@ -1396,7 +1400,7 @@ a{
 
 /*********************** Tramite Compra *******************************/
 
-#edit-customer-profile-billing label,
+.customer_profile_billing label,
 #commerce-checkout-coupon-ajax-wrapper .commerce_coupon label{
     font-size: 18px;
     font-weight: normal;
@@ -1405,18 +1409,18 @@ a{
     text-align: left;
 }
 
-#edit-customer-profile-billing .container-inline-date .date-padding{
+.customer_profile_billing .container-inline-date .date-padding{
     padding: 0px;
 }
 
-#edit-customer-profile-billing .date-no-float{
+.customer_profile_billing .date-no-float{
     width: 300px;
     margin: 0px;
     float: left;
     clear: none;
 }
 
-#edit-customer-profile-billing label span{
+.customer_profile_billing label span{
     color: black;
 }
 
@@ -1432,11 +1436,12 @@ a{
     clear: none;;
 }
 
-#edit-customer-profile-billing .date-date{
+.customer_profile_billing .date-date{
     float: left;
 }
 
-#edit-customer-profile-billing input,
+.customer_profile_billing input,
+.customer_profile_billing .field-name-field-fecha input,
 #commerce-checkout-coupon-ajax-wrapper input{
     width: 230px;
     border: solid 1px #BEBEBE;
@@ -1458,7 +1463,7 @@ a{
     margin-left: 250px;
 }
 
-#edit-customer-profile-billing textarea{
+.customer_profile_billing textarea{
     width: 232px;
     border: solid 1px #BEBEBE;
 }
