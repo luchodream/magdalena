@@ -1,0 +1,8 @@
+/**
+ * @file
+ * CSS for all themes administrator/front end
+ */
+
+body.administrador fieldset.filter-wrapper {
+	display: none;
+}

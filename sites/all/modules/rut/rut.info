@@ -1,0 +1,10 @@
+name = Rut
+description = Defines an element form for Rut.
+core = 7.x
+package = Other
+; Information added by drupal.org packaging script on 2013-09-14
+version = "7.x-1.0-beta3"
+core = "7.x"
+project = "rut"
+datestamp = "1379179010"
+

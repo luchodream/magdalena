@@ -193,6 +193,7 @@ function commerce_discount_form($form, &$form_state, CommerceDiscount $commerce_
   // Remove the title and surrounding fieldset from the offer reference field.
   $form['commerce_discount_fields']['commerce_discount_offer'][LANGUAGE_NONE]['#title'] = NULL;
   $form['commerce_discount_fields']['commerce_discount_offer'][LANGUAGE_NONE]['#type'] = 'container';
+  dpm($commerce_discount);
 
   // Add a class to custom fields for easier styling.
   // Ignore the offer reference field and any date fields. Date fields are

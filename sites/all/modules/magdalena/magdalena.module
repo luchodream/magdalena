@@ -4,22 +4,11 @@
  * Implements hook_init().
  */
 function magdalena_init() {
-  drupal_add_js(array('magdalena' => array('fb_api' => variable_get('fb_api'))), 'setting');
-
-  drupal_add_library('magdalena', 'jquery_ui_spinner');
-   // Add facebook SDK
-  drupal_add_js('(function(d, s, id){
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/es_LA/all.js";
-    fjs.parentNode.insertBefore(js, fjs);
-    }(document, \'script\', \'facebook-jssdk\'));', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-  );
-  // Add addthis JS
-  drupal_add_js('http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52c0d5620dc992cc', 'external');  
+  drupal_add_js(array('magdalena' => array('fb_api' => variable_get('fb_api'))), 'setting');  
   // JS for general purpouses
   drupal_add_js(drupal_get_path('module', 'magdalena') . '/js/magdalena.js');
+  // CSS for general purpouses
+  drupal_add_css(drupal_get_path('module', 'magdalena') . '/css/magdalena.css');
 }
 
 /*
@@ -176,7 +165,11 @@ function magdalena_permission() {
     'administer holidays' => array(
       'title' => t('Administrar Feriados'),
       'description' => t('Administer holidays for the site.'),
-    ),    
+    ),
+    'change format options' => array(
+      'title' => t('Change format options'),
+      'description' => t('Change between formats on some fields.'),
+    )
   );
 }
 
@@ -340,6 +333,14 @@ function magdalena_theme($existing, $type, $theme, $path) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK().
+ */
+function magdalena_preprocess_magdalena_user_menu(&$variables) {
+  $user_account = user_load($variables['user']->uid);
+  $variables['user_name'] = _magdalena_render_field('user', $user_account, $user_account->field_nombre, 'field_nombre');
+}
+
+/**
  * Implements hook_library().
  */
 function magdalena_library() {
@@ -363,28 +364,75 @@ function magdalena_library() {
 /**
  * Implements hook_form_alter().
  */
-function magdalena_form_alter(&$form, &$form_state, $form_id) {  
-
+function magdalena_form_alter(&$form, &$form_state, $form_id) { 
+  //dpm($form_id);
   switch ($form_id) {
-    case 'commerce_checkout_form_checkout':    
-      $comuna = taxonomy_vocabulary_machine_name_load('comuna');
-      if (!empty($comuna)) {
-        $comunas = taxonomy_get_tree($comuna->vid, 0, NULL, TRUE);
+    case 'views_form_commerce_cart_form_default':
+      if(user_is_anonymous()){
+        drupal_set_message(t('Sólo los usuarios registrados pueden completar el proceso de compra'));
+        $form['actions']['login'] = array(
+          '#type' => 'submit',
+          '#value' => t('Login'),
+        );
       }
-      $allowed_days = new stdClass();
-      foreach ($comunas as $comuna) {        
-        $fields = field_get_items('taxonomy_term', $comuna, 'field_dias_habiles');        
-        foreach ($fields as $field) {
-          $allowed_days->{$comuna->tid}[] = $field['value'];
-        }       
-      }
-      // Get holidays
-      $holidays = _magdalena_get_holidays();
-      drupal_add_js(array('allowed_days' => $allowed_days, 'holidays' => $holidays), 'setting');
-      
-      drupal_add_library('system', 'ui.datepicker');
-      $form['#attached']['js'][] = drupal_get_path('module', 'magdalena') . '/js/magdalena_checkout.js';      
       break;
+    // There are two normal login forms
+    case 'user_login':   
+    case 'user_login_block':
+      if($form_id == 'user_login'){        
+        $form['name']['#title'] = t('Email/RUT');
+        $form['name']['#description'] = t('Ingrese su email o RUT (sin números ni guiones)');
+      }    
+      // Ensure a valid validate array.
+      $form['#validate'] = is_array($form['#validate']) ? $form['#validate'] : array();
+      // Validation function must run first.
+      array_unshift($form['#validate'], 'magdalena_user_login_validate');
+      break;
+    case 'user_register_form':
+    case 'user_profile_form':
+      isset($form['locale']['#weight']) ? $form['locale']['#weight'] = 100 : '';
+      if(!user_access('administer site configuration')){
+        $form['account']['roles']['#access'] = FALSE;
+        // Don't allow to edit the user 1
+        if(arg(1) && arg(1) == 1){
+          $form['#access'] = FALSE;
+          drupal_set_message(t('Usted no posee los permisos necesarios para realizar esta accion'), 'warning');
+        }
+      }      
+      if(module_exists('rut')){
+        unset($form['account']['name']['#description']);
+        $form['account']['name']['#title']  = t('RUT');
+        $form['account']['name']['#type']   = 'rut_field';
+        // Ensure a valid validate array.
+        $form['#validate']    = is_array($form['#validate']) ? $form['#validate'] : array();
+        array_unshift($form['#validate'], 'magdalena_user_register_validate');
+      }
+      break;
+  }
+}
+
+/**
+ * Capture the username entered, if there is an @ symbol
+ */
+function magdalena_user_login_validate($form, &$form_state) {
+  if (isset($form_state['values']['name']) && strpos($form_state['values']['name'], '@') !== false) {
+    $name = db_select('users', 'u')->fields('u', array('name'))
+               ->condition('u.mail', strtolower($form_state['values']['name']))
+               ->execute()->fetchField();
+    if ($name) {
+      form_set_value($form['name'], $name, $form_state);
+    }
+  }
+}
+
+/**
+ * Capture the rut entered
+ */
+function magdalena_user_register_validate($form, &$form_state) {
+  if (isset($form_state['values']['name']) && module_exists('rut')) {
+    // Validate the rut.
+    list($rut, $dv) = rut_separate_rut($form_state['values']['name']);   
+    form_set_value($form['account']['name'], $rut . $dv, $form_state); 
   }
 }
 
@@ -405,4 +453,121 @@ function _magdalena_get_holidays(){
   $query = db_select('magdalena_holidays', 'h')->fields('h');
   $query->addExpression("CONCAT(h.day, '/', h.month)", 'date');
   return $query->range(0, 365)->execute()->fetchAll();
+}
+
+/**
+ * Implements hook_commerce_currency_info_alter().
+ * @param array $currencies
+ * @param type $langcode
+ */
+function magdalena_commerce_currency_info_alter(&$currencies, $langcode) {
+    $currencies['CLP']['symbol_placement'] = 'before';
+    $currencies['CLP']['code_placement'] = '';
+    $currencies['CLP']['symbol'] = '$';
+    $currencies['CLP']['thousands_separator'] = '.';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function magdalena_form_user_profile_form_alter(&$form, $form_state) {
+  if (isset($form['locale']) && !user_access('administer site configuration')) {
+    $form['locale']['#access'] = FALSE;  
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function magdalena_form_commerce_checkout_form_checkout_alter(&$form, $form_state) {
+  global $user;
+  //dpm($form);
+  $user_account = user_load($user->uid);
+  // The first time on complete the billing form
+  if(!isset($form['customer_profile_billing']['addressbook']) && $user->uid){    
+    $nombre     = _magdalena_render_field('user', $user_account, $user_account->field_nombre, 'field_nombre');
+    $apellidos  = _magdalena_render_field('user', $user_account, $user_account->field_apellidos, 'field_apellidos');
+    $telefono   = _magdalena_render_field('user', $user_account, $user_account->field_telefono_entrega, 'field_telefono_entrega');
+    $direccion  = _magdalena_render_field('user', $user_account, $user_account->field_direccion_entrega, 'field_direccion_entrega');
+    $comuna     = field_get_items('user', $user_account, 'field_comuna');
+    $form['customer_profile_billing']['field_nombre']['und'][0]['value']['#default_value'] = $nombre . ' ' . $apellidos;
+    $form['customer_profile_billing']['field_nombre_recibe']['und'][0]['value']['#default_value'] =  $nombre . ' ' . $apellidos;
+    $form['customer_profile_billing']['field_direccion_entrega']['und'][0]['value']['#default_value'] = $direccion;
+    $form['customer_profile_billing']['field_telefono_entrega']['und'][0]['value']['#default_value'] = $telefono;
+    $form['customer_profile_billing']['field_comuna']['und']['#default_value'] = isset($comuna[0]['tid']) ? $comuna[0]['tid'] : '';
+  } else {
+    // Default empty for comments and fecha
+    $form['customer_profile_billing']['field_fecha']['und'][0]['#default_value']['value'] = '';
+    $form['customer_profile_billing']['field_comentario']['und'][0]['value']['#default_value'] = '';
+  }
+  // Default coupon code
+  $form['commerce_coupon']['coupon_code']['#default_value'] = _magdalena_render_field('user', $user_account, $user_account->field_codigo_proveedor, 'field_codigo_proveedor');
+
+  // Change buttons position
+  if(isset($form['buttons']['cancel']['#prefix'])){
+    $form['buttons']['cancel']['#weight'] = -10;
+    unset($form['buttons']['cancel']['#prefix']);
+  }
+  // Get comunas
+  $comuna = taxonomy_vocabulary_machine_name_load('comuna');
+  if (!empty($comuna)) {
+    $comunas = taxonomy_get_tree($comuna->vid, 0, NULL, TRUE);
+  }
+  $allowed_days = new stdClass();
+  foreach ($comunas as $comuna) {        
+    $fields = field_get_items('taxonomy_term', $comuna, 'field_dias_habiles');        
+    foreach ($fields as $field) {
+      $allowed_days->{$comuna->tid}[] = $field['value'];
+    }       
+  }
+  // Get holidays
+  $holidays = _magdalena_get_holidays();
+  drupal_add_js(array('allowed_days' => $allowed_days, 'holidays' => $holidays), 'setting');
+  // Adding datepicker library
+  drupal_add_library('system', 'ui.datepicker');    
+} 
+
+/**
+ * Override or insert variables into the html template.
+ */
+function magdalena_preprocess_html(&$vars) {
+  global $user;
+  // Adding role class to body
+  if ($user->uid) {
+    foreach ($user->roles as $key => $role) {
+      $vars['classes_array'][] = str_replace(' ', '-', $role);
+    }
+  }
+}
+
+/**
+ * Helper function to render a field
+ */
+function _magdalena_render_field($entity_type, $entity, $field, $field_name, $key = 0){
+  $items = field_get_items($entity_type, $entity, $field_name);
+  if(isset($items[$key])){
+    $value = field_view_value($entity_type, $entity, $field_name, $items[$key]);
+    return render($value);
+  }
+}
+
+/**
+ * Implements hook_commerce_addressbook_labels_alter().
+ */
+function magdalena_commerce_addressbook_labels_alter(&$labels, &$profiles) {
+  foreach ($labels as $key => $label) {
+    if(isset($profiles[$key]->field_direccion_entrega)){      
+      $labels[$key] = _magdalena_render_field('commerce_customer_profile', $profiles[$key], $profiles[$key]->field_direccion_entrega, 'field_direccion_entrega');
+      unset($profiles[$key]->field_direccion_entrega);
+    }
+  }
+}
+
+/**
+ * Implements hook_commerce_addressbook_callback_alter().
+ */
+function magdalena_commerce_addressbook_callback_alter(&$commands, $form, $form_state) {
+  // Remove some pre-polulated fields, fecha and comment
+  $commands[] = ajax_command_invoke('.field-name-field-comentario textarea', 'val', array(''));
+  $commands[] = ajax_command_invoke('.field-name-field-fecha input', 'val', array(''));
 }
