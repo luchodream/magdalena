@@ -434,7 +434,7 @@ a{
 
 #block-user-login{
     float: right;
-    width: 65%;
+    width: 545px;
     margin: 0px;
     text-align: right;
     padding: 0;
@@ -961,7 +961,8 @@ a{
 }
 
 .commerce-add-to-cart input[type="submit"],
-#commerce-checkout-coupon-ajax-wrapper input[type="submit"]{
+#commerce-checkout-coupon-ajax-wrapper input[type="submit"],
+.page-user-register .block-system .form-submit{
     background-color: #ff8b01;
     font-family: 'Quicksand';
     text-transform: lowercase;
@@ -1401,7 +1402,8 @@ a{
 /*********************** Tramite Compra *******************************/
 
 .customer_profile_billing label,
-#commerce-checkout-coupon-ajax-wrapper .commerce_coupon label{
+#commerce-checkout-coupon-ajax-wrapper .commerce_coupon label,
+.page-user-register .block-system .form-item label{
     font-size: 18px;
     font-weight: normal;
     float: left;
@@ -1420,7 +1422,8 @@ a{
     clear: none;
 }
 
-.customer_profile_billing label span{
+.customer_profile_billing label span,
+.page-user-register .block-system .form-item span{
     color: black;
 }
 
@@ -1442,7 +1445,8 @@ a{
 
 .customer_profile_billing input,
 .customer_profile_billing .field-name-field-fecha input,
-#commerce-checkout-coupon-ajax-wrapper input{
+#commerce-checkout-coupon-ajax-wrapper input,
+.page-user-register .block-system .form-item input{
     width: 230px;
     border: solid 1px #BEBEBE;
     height: 20px;
@@ -1886,4 +1890,27 @@ a{
     background-color: white;
     float: left;
     margin-right: 5px;
+}
+
+/**************************** Register ***************************************/
+
+.page-user-register .block-system .form-item label{
+    float: none;
+    width: auto;
+}
+
+.page-user-register .block-system .form-item input{
+    width: 500px;
+}
+
+.page-user-register .block-system .form-item .password-field,
+.page-user-register .block-system .form-item .password-confirm{
+    width: 200px;
+}
+
+.page-user-register .block-system .form-submit{
+    margin: 0px;
+    font-size: 15px;
+    padding: 5px;
+    text-transform: none;
 }
