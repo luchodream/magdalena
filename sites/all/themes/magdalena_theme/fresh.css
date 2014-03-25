@@ -1474,7 +1474,7 @@ a{
 
 .checkout-buttons .checkout-continue, 
 .commerce-line-item-actions input[type="submit"],
-.node-type-producto .commerce-add-to-cart #edit-submit{
+.node-type-producto .pane-helper-add-to-cart .form-submit{
     background: #ff8b01 url('images/next.png') no-repeat;
     background-position: right 5px;
     font-family: 'Quicksand';
