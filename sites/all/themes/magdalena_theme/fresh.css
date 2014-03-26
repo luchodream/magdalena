@@ -1610,7 +1610,7 @@ a{
     margin-right: 10px;
 }
 
-.node-type-producto #edit-quantity{
+.node-type-producto .commerce-add-to-cart .form-item-quantity input{
     border: solid 1px #a39fc2;
     border-radius: 2px;
     width: 50px;
