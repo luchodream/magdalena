@@ -401,11 +401,15 @@ function magdalena_form_alter(&$form, &$form_state, $form_id) {
       }      
       if(module_exists('rut')){
         unset($form['account']['name']['#description']);
-        $form['account']['name']['#title']  = t('RUT');
-        $form['account']['name']['#type']   = 'rut_field';
-        // Ensure a valid validate array.
-        $form['#validate']    = is_array($form['#validate']) ? $form['#validate'] : array();
-        array_unshift($form['#validate'], 'magdalena_user_register_validate');
+        if(user_access('administer users')){
+          $form['account']['name']['#title']  = t('RUT/nombre de usuario');
+        } else {
+          $form['account']['name']['#title']  = t('RUT');
+          $form['account']['name']['#type']   = 'rut_field';
+          // Ensure a valid validate array.
+          $form['#validate']    = is_array($form['#validate']) ? $form['#validate'] : array();
+          array_unshift($form['#validate'], 'magdalena_user_register_validate');          
+        }  
       }
       break;
   }
