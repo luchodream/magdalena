@@ -71,6 +71,18 @@ function magdalena_global_settings_form() {
     '#description' => t('Like box page URL'),
     '#default_value' => variable_get('fb_like_page'),
   );
+  $form['global']['magdalena_facebook'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Social Facebook Page'),
+    '#description' => t('Social Facebook Page'),
+    '#default_value' => variable_get('magdalena_facebook'),
+  );
+  $form['global']['magdalena_twitter'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Social Twitter Page'),
+    '#description' => t('Social Twitter Page'),
+    '#default_value' => variable_get('magdalena_twitter'),
+  );    
   return system_settings_form($form);
 }
 
@@ -366,7 +378,15 @@ function magdalena_library() {
  */
 function magdalena_form_alter(&$form, &$form_state, $form_id) { 
   //dpm($form_id);
-  switch ($form_id) {
+  switch ($form_id) {    
+    case 'commerce_order_ui_order_form':
+      if(!user_access('administer site configuration')){
+        $form['commerce_customer_shipping']['#access'] = FALSE;
+        $form['commerce_coupons']['#access'] = FALSE;
+        $form['commerce_discounts']['#access'] = FALSE;
+      }
+      $form['#validate'][] = 'magdalena_order_form_validate';
+      break;    
     case 'views_form_commerce_cart_form_default':
       if(user_is_anonymous()){
         drupal_set_message(t('Sólo los usuarios registrados pueden completar el proceso de compra'));
@@ -412,6 +432,17 @@ function magdalena_form_alter(&$form, &$form_state, $form_id) {
         }  
       }
       break;
+  }
+}
+
+/**
+ * Extra validate function for commerce_order_ui_order_form
+ */
+function magdalena_order_form_validate($form, &$form_state){
+  if($form_state['values']['status'] == 'canceled'
+        && $form_state['values']['status_original'] != 'canceled' 
+        && !$form_state['values']['log']){
+    form_set_error('log', t('Para cancelar el pedido debe ingresar el motivo del mismo'));
   }
 }
 
@@ -574,4 +605,13 @@ function magdalena_commerce_addressbook_callback_alter(&$commands, $form, $form_
   // Remove some pre-polulated fields, fecha and comment
   $commands[] = ajax_command_invoke('.field-name-field-comentario textarea', 'val', array(''));
   $commands[] = ajax_command_invoke('.field-name-field-fecha input', 'val', array(''));
+}
+
+/**
+ * Implements hook_mail_alter().
+ */
+function magdalena_mail_alter(&$message) {
+  $site_name = variable_get('site_name', 'Distribuidora Magdalena');
+  $site_mail = variable_get('site_mail', 'info@distribuidoramagdalena.cl');
+  $message['from'] = $message['headers']['From'] = "'$site_name' <$site_mail>";
 }
