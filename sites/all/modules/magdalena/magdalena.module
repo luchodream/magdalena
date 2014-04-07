@@ -384,9 +384,13 @@ function magdalena_form_alter(&$form, &$form_state, $form_id) {
         $form['commerce_customer_shipping']['#access'] = FALSE;
         $form['commerce_coupons']['#access'] = FALSE;
         $form['commerce_discounts']['#access'] = FALSE;
-      }
+        // Remove some options
+        unset($form['order_status']['status']['#options'][t('Shopping cart')]);
+        unset($form['order_status']['status']['#options'][t('Checkout')]);
+        unset($form['order_status']['status']['#options'][t('Pending')]);
+      }  
       $form['#validate'][] = 'magdalena_order_form_validate';
-      break;    
+      break;
     case 'views_form_commerce_cart_form_default':
       if(user_is_anonymous()){
         drupal_set_message(t('Sólo los usuarios registrados pueden completar el proceso de compra'));
@@ -535,6 +539,8 @@ function magdalena_form_commerce_checkout_form_checkout_alter(&$form, $form_stat
     $form['customer_profile_billing']['field_fecha']['und'][0]['#default_value']['value'] = '';
     $form['customer_profile_billing']['field_comentario']['und'][0]['value']['#default_value'] = '';
   }
+  // Hide address field
+  $form['customer_profile_billing']['commerce_customer_address']['#access'] = FALSE;
   // Default coupon code
   $form['commerce_coupon']['coupon_code']['#default_value'] = _magdalena_render_field('user', $user_account, $user_account->field_codigo_proveedor, 'field_codigo_proveedor');
 
@@ -614,4 +620,36 @@ function magdalena_mail_alter(&$message) {
   $site_name = variable_get('site_name', 'Distribuidora Magdalena');
   $site_mail = variable_get('site_mail', 'info@distribuidoramagdalena.cl');
   $message['from'] = $message['headers']['From'] = "'$site_name' <$site_mail>";
+}
+
+/**
+ * Implements hook_commerce_order_status_info().
+ */
+function magdalena_commerce_order_status_info() {
+  $order_statuses = array();
+  $order_statuses['dispatched'] = array(
+    'name' => 'dispatched',
+    'title' => t('Dispatched'),
+    'state' => 'completed',
+  );
+  $order_statuses['delivered'] = array(
+    'name' => 'delivered',
+    'title' => t('Delivered'),
+    'state' => 'completed',
+  );  
+  return $order_statuses;
+}
+
+/**
+ * Implements hook_entity_view_alter().
+ */
+function magdalena_entity_view_alter(&$build, $type) {
+  switch ($type) {
+    case 'commerce_order':
+      $order = $build['webpay']['#access'] = FALSE;
+      if ($build['#view_mode'] === 'customer') {
+        // do more
+      }
+      break;
+  }
 }
