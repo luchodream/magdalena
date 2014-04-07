@@ -110,6 +110,7 @@ function magdalena_block_info() {
   );
   $blocks['shopping_cart']= array(
     'info' => t('Shopping cart'),
+    'cache' => DRUPAL_NO_CACHE,
   );
   $blocks['addthis_share']= array(
     'info' => t('Addthis share'),
