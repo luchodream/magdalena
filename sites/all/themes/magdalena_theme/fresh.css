@@ -5,7 +5,7 @@ body {
   margin: 0;
   padding: 0;
   font-size: 14px;
-  font-family: 'Quicksand'; 
+  font-family: 'Questrial'; 
   font-weight: 500;
   color: #494949;
 }
@@ -100,8 +100,6 @@ a{
     float: right;
     clear: right;
     padding-right: 35px;
-    font-weight: bold;
-    font-family: 'Quicksand';
     display: inline-block;
 }
 
@@ -222,9 +220,7 @@ a{
 }
 
 #block-magdalena-user-menu{
-    font-family: 'Quicksand';
     font-size: 12px;
-    font-weight: bold;
 }
 
 #block-magdalena-user-menu a{
@@ -362,13 +358,12 @@ a{
     padding: 0;
     height: 28px;
     text-align: center;
-    font-size: 12px; 
-    font-weight: bold;
+    font-size: 14px; 
 }
 
 .block-main-menu ul li{
     display: inline-block;
-    padding: 6px 10px 6px 10px;
+    padding: 6px 6px 6px 6px;
     margin: 0px;
     border-right: 1px #E29C00 solid;
     text-transform: uppercase;
@@ -390,12 +385,11 @@ a{
 
 /************************************* Contact info **********************************/
 
-.mail, .text, .facebook, .twitter{
+.social .mail, .social .text, .social .facebook, .social .twitter{
     margin: 0px;
     padding: 0px;
     text-transform: uppercase;
     font-size: 15px;
-    font-weight: bold;
 }
 
 #footer .mail a{
@@ -486,12 +480,11 @@ a{
 }
 
 #block-search-form .form-actions input[type="submit"]{
-    font-family: 'Quicksand';
-    font-weight: bold;
     cursor: pointer;
 }
 
 .pane-views-oferta-semana-block h2{
+    font-weight: normal;
     text-align: center;
     font-size: 24px;
     text-transform: uppercase;
@@ -516,7 +509,6 @@ a{
 }
 
 .pager-item, .pager-current{
-    font-family: 'Quicksand';
     font-weight: bold;
     font-size: 12px;
     border: #d1d1d1 solid 1px;
@@ -631,7 +623,6 @@ a{
 }
 
 .block-menu-categorias .term-name{
-    font-weight: 800;
     font-size: 16px;  
     width: 130px;
     float: left;
@@ -651,8 +642,6 @@ a{
     text-transform: uppercase;
     padding: 0px;
     font-size: 12px;
-    font-family: 'Quicksand';
-    font-weight: bold;
 }
 
 .block-footer ul{
@@ -725,8 +714,7 @@ a{
 
 .block-like-box h2, .block-like-box h3{
     color: #342D7B;
-    font-family: 'Quicksand'; 
-    font-weight: 700;
+    font-weight: normal;
 }
 
 /****************************** Adds block ******************************/
@@ -769,7 +757,6 @@ a{
 .block-shopping-cart a {
     text-decoration: none;
     text-transform: uppercase;
-    font-weight: 700;
     color: #fff;
 }
 
@@ -937,18 +924,11 @@ a{
 
 .view-oferta-semana td{
     padding: 10px;
-  //  border: solid white 1px;
-  //  width: 150px;
-}
-
-.view-oferta-semana td:hover{
-    //border: solid grey 1px;
 }
 
 .views-field-commerce-price{
     font-size: 17px;
     color: #FF9C0C;
-    font-weight: bold;
 }
 
 .views-field-title{
@@ -964,11 +944,9 @@ a{
 #commerce-checkout-coupon-ajax-wrapper input[type="submit"],
 .page-user-register .block-system .form-submit{
     background-color: #ff8b01;
-    font-family: 'Quicksand';
     text-transform: lowercase;
     border: none;
     color: white;
-    font-weight: bold;
     padding: 3px;
     margin-top: 5px;
     cursor: pointer;
@@ -1189,7 +1167,7 @@ a{
 .pane-node-title h1{
     margin-top: 0px;
     font-size: 30px;
-    font-weight: bold;
+    font-weight: normal;
     color: #342D7B;
 }
 
@@ -1477,11 +1455,9 @@ a{
 .node-type-producto .pane-helper-add-to-cart .form-submit{
     background: #ff8b01 url('images/next.png') no-repeat;
     background-position: right 5px;
-    font-family: 'Quicksand';
     text-transform: uppercase;
     border: none;
     color: white;
-    font-weight: bold;
     margin-top: 5px;
     cursor: pointer;
     font-size: 20px;
@@ -1493,11 +1469,9 @@ a{
 .checkout-back.form-submit:hover, .node-type-producto .back-button{
     background: #BEBEBE url('images/cancel.png') no-repeat;
     background-position: 10px 10px;
-    font-family: 'Quicksand';
     text-transform: uppercase;
     border: none;
     color: white;
-    font-weight: bold;
     margin-top: 5px;
     cursor: pointer;
     font-size: 20px;
@@ -1509,7 +1483,6 @@ a{
 .checkout-buttons .checkout-cancel:hover{
     background: #BEBEBE url('images/cancel.png') no-repeat;
     background-position: 10px 10px;
-    font-family: 'Quicksand';
     text-transform: uppercase;
     border: none;
     color: white;
@@ -1681,6 +1654,7 @@ a{
 }
 
 .node-type-producto .panel-bottom .pane-title{
+    font-weight: normal;
     text-transform: uppercase;
     color: #342D7B;
     text-align: center;
