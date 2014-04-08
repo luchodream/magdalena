@@ -5,9 +5,14 @@ body {
   margin: 0;
   padding: 0;
   font-size: 14px;
-  font-family: 'Questrial'; 
+  font-family: Verdana, Geneva, sans-serif; 
   font-weight: 500;
   color: #494949;
+}
+
+h1{
+    font-family: "Questrial";
+    font-size: 2em;
 }
 
 #wrapper {
@@ -354,6 +359,7 @@ a{
 }
 
 .block-main-menu ul{
+    font-family: "Questrial";
     margin: 0;
     padding: 0;
     height: 28px;
@@ -484,6 +490,7 @@ a{
 }
 
 .pane-views-oferta-semana-block h2{
+    font-family: "Questrial";    
     font-weight: normal;
     text-align: center;
     font-size: 24px;
@@ -505,6 +512,7 @@ a{
 }
 
 .pane-page-title h1{
+    font-family: "Questrial";      
     color: #3f3983;
 }
 
@@ -575,6 +583,7 @@ a{
 /**************************** Menu Categories ****************************/
 
 .block-menu-categorias{
+    font-family: "Questrial";    
     margin-top: 60px;
     margin-left: 15px;
     width: 230px;
@@ -703,6 +712,7 @@ a{
 /******************************* Like Box *******************************/
 
 .block-like-box{
+    font-family: "Questrial";    
     margin: 15px 0;
     padding: 5px;
     background-color: #ECECEC;
@@ -747,7 +757,8 @@ a{
 /**************************** Shopping cart *****************************/
 
 .block-shopping-cart{
-    color: #fff;
+    font-family: "Questrial";
+    color: #fff;    
     float: left;
     width: 232px;
     height: 28px;
@@ -774,10 +785,9 @@ a{
     float: right;
 }
 
-#tabs-wrapper h1{
-    color: #1c1b41;
-    text-transform: uppercase;
-    font-size: 24px;
+h1.page-title{
+    font-family: "Questrial"; 
+    color: #342D7B;
     margin-top: 30px;
 }
 
@@ -977,7 +987,8 @@ a{
 }
 
 .view-receta-destacada .titulo{
-    font-size: 30px;
+    font-family: "Questrial";    
+    font-size: 2em;
     font-weight: bold;
 }
 
@@ -1177,9 +1188,8 @@ a{
 }
 
 .pane-node-title h1{
+    font-family: "Questrial";    
     margin-top: 0px;
-    font-size: 30px;
-    font-weight: normal;
     color: #342D7B;
 }
 
@@ -1666,6 +1676,7 @@ a{
 }
 
 .node-type-producto .panel-bottom .pane-title{
+    font-family: "Questrial";    
     font-weight: normal;
     text-transform: uppercase;
     color: #342D7B;
