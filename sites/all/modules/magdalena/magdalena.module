@@ -654,3 +654,12 @@ function magdalena_entity_view_alter(&$build, $type) {
       break;
   }
 }
+
+/**
+ * Implements hook_commerce_entity_access().
+ */
+function magdalena_commerce_entity_access($op, $entity, $account, $entity_type) {
+  if($op == 'delete' && !user_access('administer site configuration')){  
+    return FALSE;
+  }
+}
