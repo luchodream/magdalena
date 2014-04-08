@@ -944,7 +944,6 @@ a{
 #commerce-checkout-coupon-ajax-wrapper input[type="submit"],
 .page-user-register .block-system .form-submit{
     background-color: #ff8b01;
-    text-transform: lowercase;
     border: none;
     color: white;
     padding: 3px;
@@ -954,6 +953,19 @@ a{
 
 .commerce-add-to-cart .view-front-productos{
     text-align: center;
+}
+
+.views-field-add-to-cart-form .form-item-quantity{
+    float: left;
+}
+
+.views-field-add-to-cart-form .form-item-quantity label{
+    display: none;
+}
+
+.views-field-add-to-cart-form input[type="submit"]{
+    margin: 1em 0;
+    float: left;
 }
 
 /***************************** Recetas ***********************************/
@@ -1570,20 +1582,20 @@ a{
     font-weight: bold;
 }
 
-.node-type-producto .commerce-add-to-cart .form-item-quantity{
+.pane-helper-add-to-cart .commerce-add-to-cart .form-item-quantity{
     text-align: left;
     color: #342D7B;
     margin-top: 30px;
 }
 
-.node-type-producto .commerce-add-to-cart .form-item-quantity label{
+.pane-helper-add-to-cart .commerce-add-to-cart .form-item-quantity label{
     float: left;
     font-size: 15px;
     font-weight: normal;
     margin-right: 10px;
 }
 
-.node-type-producto .commerce-add-to-cart .form-item-quantity input{
+.pane-helper-add-to-cart .commerce-add-to-cart .form-item-quantity input{
     border: solid 1px #a39fc2;
     border-radius: 2px;
     width: 50px;
@@ -1592,27 +1604,27 @@ a{
     padding-left: 5px;
 }
 
-.node-type-producto .ui-spinner-buttons{
+.pane-helper-add-to-cart .ui-spinner-buttons{
     margin-left: 10px;
 }
 
-.node-type-producto .ui-spinner-button.ui-spinner-up{
+.pane-helper-add-to-cart .ui-spinner-button.ui-spinner-up{
     border: none;
     cursor: pointer;
 }
 
-.node-type-producto .ui-icon-triangle-1-n{
+.pane-helper-add-to-cart .ui-icon-triangle-1-n{
     background-image: url('images/flecha-arriba.png');
     background-color: white;
     background-position: 2px 2px;
 }
 
-.node-type-producto .ui-spinner-button.ui-spinner-down{
+.pane-helper-add-to-cart .ui-spinner-button.ui-spinner-down{
     border: none;
     cursor: pointer;
 }
 
-.node-type-producto .ui-icon-triangle-1-s{
+.pane-helper-add-to-cart .ui-icon-triangle-1-s{
     background-image: url('images/flecha-abajo.png');
     background-color: white;
     background-position: 2px 6px;
