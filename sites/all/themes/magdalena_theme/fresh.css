@@ -93,7 +93,7 @@ h1{
 }
 
 #block-user-login .form-actions{
-    margin-top: 8px;
+    margin-top: 10px;
 }
 
 a{
@@ -193,7 +193,7 @@ a{
 }
 
 .block-user-login .item-list{
-    margin-top: 1em;
+    margin-top: 13px;
     margin-bottom: 1em;
     margin-left: 1em;
     float: left;
@@ -1020,11 +1020,11 @@ h1.page-title{
 .view-receta-destacada .cantidad{
     font-size: 12px;
     font-weight: bold;
-    padding: 0px 3px 0px 3px;
+    padding: 3px;
     background-color: #FBBA00;
     text-transform: uppercase;
-    width: 73px;
     color: black;
+    display: inline-block;
 }
 
 .view-receta-destacada .cantidad{
@@ -1044,7 +1044,6 @@ h1.page-title{
     font-family: Verdana, sans-serif;
     color: #ff8b00;
     text-decoration: underline;
-    font-weight: bold;
 }
 
 .pane-front-recetas-mas-recetas h2{
@@ -1057,21 +1056,20 @@ h1.page-title{
 .view-mas-recetas .cantidad, .node-type-producto .views-field-field-personas{
     font-size: 12px;
     font-weight: bold;
-    padding: 0px 3px 0px 3px;
+    padding: 3px;
     background-color: #FBBA00;
     text-transform: uppercase;
-    width: 73px;
     color: black;
     float: left;
     margin-left: 10px;
     margin-top: 5px;
+    display: inline-block;
 }
 
 .view-mas-recetas .more a{
     font-family: Verdana, sans-serif;
     color: #ff8b00;
     text-decoration: underline;
-    font-weight: bold;
 }
 
 .view-mas-recetas .more{
@@ -1170,7 +1168,6 @@ h1.page-title{
     font-family: Verdana, sans-serif;
     color: #ff8b00;
     text-decoration: underline;
-    font-weight: bold;
     clear: right;
 }
 
@@ -1357,7 +1354,6 @@ h1.page-title{
     font-family: Verdana, sans-serif;
     color: #ff8b00;
     text-decoration: underline;
-    font-weight: bold;
     clear: right;
 }
 
@@ -1486,9 +1482,10 @@ h1.page-title{
 
 #commerce-checkout-coupon-ajax-wrapper input[type="submit"]{
     width: 120px;
-    margin-top: 12px;
+    margin-top: 14px;
     height: 24px;
     background-color: #8a8a8a;
+    font-family: 'Questrial';
 }
 
 #commerce-checkout-coupon-ajax-wrapper .description{
@@ -1811,6 +1808,10 @@ h1.page-title{
 
 .page-checkout-review .checkout-review td{
     font-size: 18px;
+}
+
+table.checkout-review .pane-title td{
+    font-weight: normal;
 }
 
 .page-checkout-review .commerce_payment{
